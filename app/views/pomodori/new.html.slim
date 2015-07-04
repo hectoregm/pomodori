@@ -8,5 +8,12 @@ h1 New pomodori
 
 = content_for :javascripts do
   javascript:
-    $('#timer').TimeCircles();
+    $('#timer').TimeCircles({ time: {
+      Days: {show: false},
+      Hours: {show: false},
+      Minutes: { color: '#E64C3C' },
+      Seconds: { color: '#E64C3C' }
+    }, total_duration: 1500,
+    use_background: false,
+    direction: "Counter-clockwise"});
 
