@@ -1,0 +1,18 @@
+= form_for @pomodoro do |f|
+  - if @pomodoro.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@pomodoro.errors.count, "error")} prohibited this pomodoro from being saved:"
+      ul
+        - @pomodoro.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :started_at
+    = f.datetime_select :started_at
+  .field
+    = f.label :completed_at
+    = f.datetime_select :completed_at
+  .field
+    = f.label :length
+    = f.number_field :length
+  .actions = f.submit

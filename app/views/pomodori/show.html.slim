@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Started at:
+  = @pomodoro.started_at
+p
+  strong Completed at:
+  = @pomodoro.completed_at
+p
+  strong Length:
+  = @pomodoro.length
+
+= link_to 'Edit', edit_pomodoro_path(@pomodoro)
+'|
+= link_to 'Back', pomodori_path

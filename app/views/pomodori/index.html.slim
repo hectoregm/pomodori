@@ -1,0 +1,25 @@
+h1 Listing pomodori
+
+table
+  thead
+    tr
+      th Started at
+      th Completed at
+      th Length
+      th
+      th
+      th
+
+  tbody
+    - @pomodori.each do |pomodoro|
+      tr
+        td = pomodoro.started_at
+        td = pomodoro.completed_at
+        td = pomodoro.length
+        td = link_to 'Show', pomodoro
+        td = link_to 'Edit', edit_pomodoro_path(pomodoro)
+        td = link_to 'Destroy', pomodoro, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Pomodoro', new_pomodoro_path
