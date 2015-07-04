@@ -1,5 +1,12 @@
-h1 New pomodoro
+h1 New pomodori
+
+#timer data-timer=1500
 
 == render 'form'
 
 = link_to 'Back', pomodori_path
+
+= content_for :javascripts do
+  javascript:
+    $('#timer').TimeCircles();
+
