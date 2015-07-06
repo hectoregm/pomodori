@@ -1,19 +1,39 @@
 h1 New pomodori
 
-#timer data-timer=1500
-
-== render 'form'
+#timer data-timer=20
 
 = link_to 'Back', pomodori_path
 
 = content_for :javascripts do
   javascript:
-    $('#timer').TimeCircles({ time: {
-      Days: {show: false},
-      Hours: {show: false},
+    var initial_time = new Date();
+    var timer = $('#timer').TimeCircles({ time: {
+      Days: { show: false },
+      Hours: { show: false },
       Minutes: { color: '#E64C3C' },
       Seconds: { color: '#E64C3C' }
-    }, total_duration: 1500,
+    }, total_duration: 20,
+    count_past_zero: false,
     use_background: false,
-    direction: "Counter-clockwise"});
+    direction: "Counter-clockwise" });
+    timer.addListener(function (unit, value, total) {
+      if (total === 0) {
+        var end_time = new Date();
+        console.log("End of Pomodoro");
+        $.ajax({
+          type: "POST",
+          url: "/pomodori",
+          dataType: "json",
+          data: { pomodoro: { started_at: initial_time , completed_at: end_time, length: 25 } },
+          success: function (data) {
+            console.log("Successful AJAX call.");
+            console.log(data);
+          },
+          error: function(data) {
+            console.log("Error in AJAX call.");
+            console.log(data);
+          }
+        });
+      }
+    });
 
