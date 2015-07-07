@@ -1,6 +1,10 @@
 h1 New pomodori
 
-#timer data-timer=20
+#timer data-timer=10
+
+audio.alarm src=audio_path('alarm.wav')
+  p 
+    Your browser does not support the <code>audio</code> element.
 
 = link_to 'Back', pomodori_path
 
@@ -12,13 +16,15 @@ h1 New pomodori
       Hours: { show: false },
       Minutes: { color: '#E64C3C' },
       Seconds: { color: '#E64C3C' }
-    }, total_duration: 20,
+    }, total_duration: 10,
     count_past_zero: false,
     use_background: false,
     direction: "Counter-clockwise" });
     timer.addListener(function (unit, value, total) {
       if (total === 0) {
         var end_time = new Date();
+        var alarm = document.querySelector('.alarm');
+        alarm.play();
         console.log("End of Pomodoro");
         $.ajax({
           type: "POST",
