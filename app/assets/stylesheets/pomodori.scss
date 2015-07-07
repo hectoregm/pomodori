@@ -1,5 +1,14 @@
+h1 {
+  text-align: center;
+}
+
+.time_container {
+  width: 100%;
+  text-align: center;
+}
+
 #timer {
-    width: 600px;
-    height: 200px;
-    margin-bottom: 10px;
+  width: 400px;
+  height: 200px;
+  display: inline-block;
 }

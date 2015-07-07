@@ -7,8 +7,8 @@ html
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
   body
-
-    = yield
+    .container-fluid
+      = yield
 
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = yield(:javascripts) if content_for?(:javascripts)

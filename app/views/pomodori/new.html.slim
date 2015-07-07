@@ -1,6 +1,9 @@
-h1 New pomodori
+.row
+  h1 Pomodoro
 
-#timer data-timer=10
+.row
+  .time_container
+    #timer data-timer=1500
 
 audio.alarm src=audio_path('alarm.wav')
   p 
@@ -16,7 +19,7 @@ audio.alarm src=audio_path('alarm.wav')
       Hours: { show: false },
       Minutes: { color: '#E64C3C' },
       Seconds: { color: '#E64C3C' }
-    }, total_duration: 10,
+    }, total_duration: 1500,
     count_past_zero: false,
     use_background: false,
     direction: "Counter-clockwise" });
