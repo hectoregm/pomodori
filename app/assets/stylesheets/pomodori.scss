@@ -5,10 +5,19 @@ h1 {
 .time_container {
   width: 100%;
   text-align: center;
+
+  .row {
+    width: 500px;
+    height: 500px;
+    display: inline-block;
+  }
 }
 
-#timer {
-  width: 400px;
-  height: 200px;
-  display: inline-block;
-}
+#my-soon-counter {background-color:#ffffff;}
+#my-soon-counter .soon-reflection {background-color:#ffffff;background-image:linear-gradient(#ffffff 25%,rgba(255,255,255,0));}
+#my-soon-counter {background-position:top;}
+#my-soon-counter {color:#412d13;}
+#my-soon-counter .soon-label {color:#fa6c00;}
+#my-soon-counter .soon-ring-progress {background-color:#f0f0f0;}
+#my-soon-counter .soon-ring-progress {border-top-width:0.1em;}
+#my-soon-counter .soon-ring-progress {border-bottom-width:0.05em;}

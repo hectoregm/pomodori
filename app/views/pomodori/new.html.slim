@@ -1,9 +1,9 @@
 .row
   h1 Pomodoro
 
-.row
-  .time_container
-    #timer data-timer=1500
+.time_container
+  .row
+    #my-soon-counter.soon data-due="in 25 minutes" data-layout="group" data-format="m,s" data-face="slot roll left fast" data-visual="ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom" data-scale-max="fill"
 
 audio.alarm src=audio_path('alarm.wav')
   p 
@@ -13,36 +13,5 @@ audio.alarm src=audio_path('alarm.wav')
 
 = content_for :javascripts do
   javascript:
-    var initial_time = new Date();
-    var timer = $('#timer').TimeCircles({ time: {
-      Days: { show: false },
-      Hours: { show: false },
-      Minutes: { color: '#E64C3C' },
-      Seconds: { color: '#E64C3C' }
-    }, total_duration: 1500,
-    count_past_zero: false,
-    use_background: false,
-    direction: "Counter-clockwise" });
-    timer.addListener(function (unit, value, total) {
-      if (total === 0) {
-        var end_time = new Date();
-        var alarm = document.querySelector('.alarm');
-        alarm.play();
-        console.log("End of Pomodoro");
-        $.ajax({
-          type: "POST",
-          url: "/pomodori",
-          dataType: "json",
-          data: { pomodoro: { started_at: initial_time , completed_at: end_time, length: 25 } },
-          success: function (data) {
-            console.log("Successful AJAX call.");
-            console.log(data);
-          },
-          error: function(data) {
-            console.log("Error in AJAX call.");
-            console.log(data);
-          }
-        });
-      }
-    });
+
 
