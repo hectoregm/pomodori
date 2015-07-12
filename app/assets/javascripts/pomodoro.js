@@ -1,12 +1,28 @@
 pomodori.pomodoro = (function () {
   var start_time, state, end_time, total;
+  var timer = document.querySelector('.soon');
   var alarm = document.querySelector('.alarm');
+  var title = document.querySelector('.title');
+  var start = document.querySelector('.start');
 
   var init = function () {
     console.log("In init");
     start_time = new Date();
     state = "work";
     total = 0;
+
+    $(start).on('click', function () {
+      console.log("Clicked Start button");
+      start();
+    });
+  };
+
+  var start = function () {
+    start_time = new Date();
+    state = "work";
+
+    title.innerHTML = "Pomodoro";
+    Soon.setOption(timer, 'due', 'in 10 seconds');
   };
 
   var completed = function () {
@@ -26,7 +42,8 @@ pomodori.pomodoro = (function () {
 
           console.log("Start of break");
           state = "break";
-          Soon.setOption(document.querySelector('.soon'), 'due', 'in 10 seconds');
+          title.innerHTML = "Break";
+          Soon.setOption(timer, 'due', 'in 10 seconds');
         },
         error: function(data) {
           console.log("Error in AJAX call.");
@@ -35,6 +52,8 @@ pomodori.pomodoro = (function () {
       });
     } else if (state === "break") {
       console.log("End of break");
+      $('.start').removeClass("hide");
+      title.innerHTML = "Continue ?";
     }
   };
 

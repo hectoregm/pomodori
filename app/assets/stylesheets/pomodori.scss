@@ -2,13 +2,12 @@ h1 {
   text-align: center;
 }
 
-.time_container {
+.container {
   width: 100%;
   text-align: center;
 
   .row {
     width: 500px;
-    height: 500px;
     display: inline-block;
   }
 }
@@ -21,3 +20,6 @@ h1 {
 #my-soon-counter .soon-ring-progress {background-color:#f0f0f0;}
 #my-soon-counter .soon-ring-progress {border-top-width:0.1em;}
 #my-soon-counter .soon-ring-progress {border-bottom-width:0.05em;}
+#my-soon-counter.soon[data-layout*='group'] {
+  padding: 0.5em 0;
+}
