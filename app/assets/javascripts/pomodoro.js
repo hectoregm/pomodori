@@ -4,6 +4,7 @@ pomodori.pomodoro = (function () {
   var alarm = document.querySelector('.alarm');
   var title = document.querySelector('.title');
   var start = document.querySelector('.start');
+  var reset = document.querySelector('.reset');
 
   var init = function (testing) {
     if (testing) {
@@ -18,6 +19,10 @@ pomodori.pomodoro = (function () {
       startWork();
     });
 
+    $(reset).on('click', function () {
+      resetPomodoro();
+    });
+
     startWork();
   };
 
@@ -27,13 +32,15 @@ pomodori.pomodoro = (function () {
 
     title.innerHTML = "Pomodoro";
     Soon.setOption(timer, 'due', pomodoro_time);
-    $(start).addClass("hide");
+    $(start).addClass('hide');
+    $(reset).removeClass('hide');
   };
 
   var startBreak = function () {
     state = "break";
 
     title.innerHTML = "Break";
+    $(reset).addClass('hide');
 
     if (total === 4) {
       Soon.setOption(timer, 'due', 'in 30 minutes');
@@ -42,7 +49,17 @@ pomodori.pomodoro = (function () {
       Soon.setOption(timer, 'due', break_time);
       title.innerHTML = "Break";
     }
-  }
+  };
+
+  var resetPomodoro = function () {
+    state = "standby";
+    total = 0;
+
+    title.innerHTML = "Pomodoro Reset. Try Again ?";
+    $(start).removeClass('hide');
+    $(reset).addClass('hide');
+    Soon.freeze(timer);
+  };
 
   var completed = function () {
     end_time = new Date();
