@@ -1,7 +1,8 @@
 pomodori.pomodoro = (function () {
   var start_time, state, end_time, total, pomodoro_time, break_time;
   var timer = document.querySelector('.soon');
-  var alarm = document.querySelector('.alarm');
+  var alarmAudio = document.querySelector('.alarm-audio');
+  var startAudio = document.querySelector('.start-audio');
   var title = document.querySelector('.title');
   var start = document.querySelector('.start');
   var reset = document.querySelector('.reset');
@@ -31,7 +32,9 @@ pomodori.pomodoro = (function () {
     state = "work";
 
     title.innerHTML = "Pomodoro";
+    startAudio.play();
     Soon.setOption(timer, 'due', pomodoro_time);
+
     $(start).addClass('hide');
     $(reset).removeClass('hide');
   };
@@ -63,7 +66,7 @@ pomodori.pomodoro = (function () {
 
   var completed = function () {
     end_time = new Date();
-    alarm.play();
+    alarmAudio.play();
 
     if (state === "work") {
       $.ajax({
