@@ -3,7 +3,7 @@
 
 .container
   .row
-    #my-soon-counter.soon data-due="in 10 seconds" data-layout="group" data-format="m,s" data-face="slot roll left fast" data-visual="ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom" data-scale-max="fill" data-event-complete="completed"
+    #my-soon-counter.soon data-due="in 25 minutes" data-layout="group" data-format="m,s" data-face="slot roll left fast" data-visual="ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom" data-scale-max="fill" data-event-complete="completed"
   .row
     button.btn.btn-success.btn-lg.start.hide type="button" Start Pomodoro
 
@@ -18,7 +18,7 @@ audio.alarm src=audio_path('alarm.wav')
   javascript:
     var completed = pomodori.pomodoro.completed;
     jQuery(function($) {
-      pomodori.pomodoro.init(true);
+      pomodori.pomodoro.init();
     });
 
 

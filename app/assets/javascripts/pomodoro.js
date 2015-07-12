@@ -34,7 +34,14 @@ pomodori.pomodoro = (function () {
     state = "break";
 
     title.innerHTML = "Break";
-    Soon.setOption(timer, 'du', break_time);
+
+    if (total === 4) {
+      Soon.setOption(timer, 'due', 'in 30 minutes');
+      title.innerHTML = "Long Break";
+    } else {
+      Soon.setOption(timer, 'due', break_time);
+      title.innerHTML = "Break";
+    }
   }
 
   var completed = function () {
