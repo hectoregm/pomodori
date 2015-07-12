@@ -3,7 +3,7 @@
 
 .time_container
   .row
-    #my-soon-counter.soon data-due="in 25 minutes" data-layout="group" data-format="m,s" data-face="slot roll left fast" data-visual="ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom" data-scale-max="fill" data-event-complete="complete"
+    #my-soon-counter.soon data-due="in 10 seconds" data-layout="group" data-format="m,s" data-face="slot roll left fast" data-visual="ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom" data-scale-max="fill" data-event-complete="completed"
 
 audio.alarm src=audio_path('alarm.wav')
   p 
@@ -13,35 +13,9 @@ audio.alarm src=audio_path('alarm.wav')
 
 = content_for :javascripts do
   javascript:
-    var initial_time = new Date();
-    var state = "work";
-    var complete = function () {
-      var end_time = new Date();
-      var alarm = document.querySelector('.alarm');
-      alarm.play();
-
-      if (state === "work") {
-        $.ajax({
-          type: "POST",
-          url: "/pomodori",
-          dataType: "json",
-          data: { pomodoro: { started_at: initial_time , completed_at: end_time, length: 25 } },
-          success: function (data) {
-            console.log("Successful AJAX call.");
-            console.log(data);
-
-            console.log("Start of break");
-            state = "break";
-            Soon.setOption(document.querySelector('.soon'), 'due', 'in 5 minutes');
-          },
-          error: function(data) {
-            console.log("Error in AJAX call.");
-            console.log(data);
-          }
-        });
-      } else if (state === "break") {
-        console.log("End of break");
-      }
-    };
+    var completed = pomodori.pomodoro.completed;
+    jQuery(function($) {
+      pomodori.pomodoro.init();
+    });
 
 
