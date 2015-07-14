@@ -93,5 +93,5 @@ pomodori.pomodoro = (function () {
   return {
     init: init,
     completed: completed
-  }
+  };
 })();
