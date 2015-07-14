@@ -33,6 +33,12 @@ pomodori.pomodoro = (function () {
 
     title.innerHTML = "Pomodoro";
     startAudio.play();
+
+    // Hack to workaround iOS Safari limitation of
+    // only loading/playing audio after an explicit user action
+    alarmAudio.play();
+    alarmAudio.pause();
+
     Soon.setOption(timer, 'due', pomodoro_time);
 
     $(start).addClass('hide');
