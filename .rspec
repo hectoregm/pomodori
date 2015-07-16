@@ -1,2 +1,4 @@
 --color
 --require spec_helper
+--format html --out coverage/rspec.html
+--format documentation
