@@ -29,7 +29,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'spring-commands-rspec'
-  gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
