@@ -28,6 +28,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'poltergeist'
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 2.0'
   gem 'spring'
