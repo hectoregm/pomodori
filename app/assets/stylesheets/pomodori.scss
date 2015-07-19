@@ -1,5 +1,6 @@
 h1 {
   text-align: center;
+  font-size: 27px;
 }
 
 .container {
@@ -7,20 +8,55 @@ h1 {
   text-align: center;
 
   .row {
-    width: 50%;
+    width: 100%;
     display: inline-block;
     margin: 0;
   }
 }
 
-#my-soon-counter {background-color:#ffffff;}
-#my-soon-counter .soon-reflection {background-color:#ffffff;background-image:linear-gradient(#ffffff 25%,rgba(255,255,255,0));}
-#my-soon-counter {background-position:top;}
-#my-soon-counter {color:#412d13;}
-#my-soon-counter .soon-label {color:#fa6c00;}
-#my-soon-counter .soon-ring-progress {background-color:#f0f0f0;}
-#my-soon-counter .soon-ring-progress {border-top-width:0.1em;}
-#my-soon-counter .soon-ring-progress {border-bottom-width:0.05em;}
-#my-soon-counter.soon[data-layout*='group'] {
+#timer {
+  background-color:#ffffff;
+  background-position:top;
+  color:#412d13;
+}
+
+#timer .soon-reflection {
+  background-color:#ffffff;
+  background-image:linear-gradient(#ffffff 25%,rgba(255,255,255,0));
+}
+
+#timer .soon-label {
+  color:#fa6c00;
+  font-size: .48em !important;
+}
+
+#timer .soon-ring-progress {
+  background-color:#f0f0f0;
+  border-top-width:0.1em;
+  border-bottom-width:0.05em;
+}
+
+#timer.soon[data-layout*='group'] {
   padding: 0.5em 0;
+}
+
+.btn-lg {
+  font-size: 20px;
+}
+
+@media (min-width: 500px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  #timer .soon-label {
+    color:#fa6c00;
+    font-size: .32em !important;
+  }
+  
+  .container {
+    .row {
+      width: 70%;
+    }
+  }
 }
