@@ -1,6 +1,7 @@
 pomodori.pomodoro = (function () {
-  var start_time, state, end_time, total, pomodoro_time, break_time;
-  var timer = document.querySelector('.soon');
+  var start_time, end_time, total, pomodoro_time, break_time;
+  var state = "initial";
+  var timer = document.querySelector('#timer');
   var alarmAudio = document.querySelector('.alarm-audio');
   var startAudio = document.querySelector('.start-audio');
   var title = document.querySelector('.title');
@@ -8,14 +9,17 @@ pomodori.pomodoro = (function () {
   var reset = document.querySelector('.reset');
 
   var init = function (testing) {
+    // Total number of pomodoros completed in this session
+    total = 0;
+
     if (testing) {
       break_time = pomodoro_time = 'in 10 seconds';
     } else {
       pomodoro_time = 'in 25 minutes';
       break_time = 'in 5 minutes';
     }
-    total = 0;
 
+    // Connect events for start and reset of pomodoro timer.
     $(start).on('click', function () {
       startWork();
     });
@@ -23,14 +27,30 @@ pomodori.pomodoro = (function () {
     $(reset).on('click', function () {
       resetPomodoro();
     });
+  };
 
-    startWork();
+  var buildTimer = function () {
+    Soon.create(timer, {
+      due: pomodoro_time,
+      layout: 'group',
+      format: 'm,s',
+      face: 'slot roll left fast',
+      visual: 'ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom',
+      scaleMax: 'fill',
+      eventComplete: completed
+    });
   };
 
   var startWork = function () {
     start_time = new Date();
-    state = "work";
 
+    // If first time need to build timer, need too to be able to play
+    // sound in iOS
+    if (state === 'initial') {
+      buildTimer();
+    }
+
+    state = "work";
     title.innerHTML = "Pomodoro";
     startAudio.play();
 

@@ -3,10 +3,11 @@
 
 .container
   .row
-    #my-soon-counter.soon data-due="in 25 minutes" data-layout="group" data-format="m,s" data-face="slot roll left fast" data-visual="ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom" data-scale-max="fill" data-event-complete="completed"
+    #timer
+
   .row
-    button.btn.btn-success.btn-lg.start.hide type="button" Start Pomodoro
-    button.btn.btn-danger.btn-lg.reset type="button" Reset Pomodoro
+    button.btn.btn-success.btn-lg.start type="button" Start Pomodoro
+    button.btn.btn-danger.btn-lg.reset.hide type="button" Reset Pomodoro
 
 
 audio.alarm-audio src=audio_path('alarm.wav')
