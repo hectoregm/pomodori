@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  resources :pomodori
+  resources :pomodori, except: [:edit, :update, :destroy]
   root 'welcome#index'
 end
