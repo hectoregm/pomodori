@@ -34,5 +34,7 @@ group :development, :test do
   gem 'spring'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'method_source'
   gem 'codeclimate-test-reporter', require: nil
 end
