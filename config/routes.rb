@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :tasks
-  resources :pomodori, except: [:edit, :update, :destroy]
+  resources :tasks do
+    resources :pomodori, except: [:edit, :update, :destroy]
+  end
   root 'welcome#index'
 end
