@@ -7,6 +7,8 @@ button type="button" class="btn btn-primary btn-lg new-task"
   - @tasks.each do |task|
     li.list-group-item
       = link_to task.name, task
+      button type='button' class='btn btn-success start'
+        = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn-link'
       button type='button' class='btn btn-danger destroy'
         = link_to 'Destroy', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn-link'
 

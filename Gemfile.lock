@@ -85,6 +85,11 @@ GEM
     formatador (0.2.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    gon (5.2.3)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
     guard (2.12.8)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
@@ -191,6 +196,7 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rdoc (4.2.0)
+    request_store (1.2.0)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -281,6 +287,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   factory_girl_rails
+  gon
   guard-bundler
   guard-livereload (~> 2.4)
   guard-rspec

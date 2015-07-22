@@ -97,9 +97,12 @@ pomodori.pomodoro = (function () {
     if (state === "work") {
       $.ajax({
         type: "POST",
-        url: "/pomodori",
+        url: "/tasks/"+ pom.task_id + "/pomodori",
         dataType: "json",
-        data: { pomodoro: { started_at: start_time , completed_at: end_time, length: 25 } },
+        data: { pomodoro: { started_at: start_time ,
+                            completed_at: end_time,
+                            task_id: pom.task_id,
+                            length: 25 } },
         success: function (data) {
           console.log(data);
           total += 1;

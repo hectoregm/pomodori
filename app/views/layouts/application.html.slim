@@ -10,5 +10,6 @@ html
     .container-fluid
       = yield
 
+    = include_gon namespace: 'pom'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = yield(:javascripts) if content_for?(:javascripts)

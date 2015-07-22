@@ -9,6 +9,8 @@ class PomodoriController < ApplicationController
   end
 
   def new
+    @task = Task.find(params[:task_id])
+    gon.task_id = @task.id
     @pomodoro = Pomodoro.new
   end
 
@@ -18,7 +20,7 @@ class PomodoriController < ApplicationController
     respond_to do |format|
       if @pomodoro.save
         format.json do
-          render :show, status: :created, location: @pomodoro
+          render :show, status: :created
         end
       else
         format.json do
@@ -32,6 +34,6 @@ class PomodoriController < ApplicationController
   private
 
   def pomodoro_params
-    params.require(:pomodoro).permit(:started_at, :completed_at, :length)
+    params.require(:pomodoro).permit(:started_at, :task_id, :completed_at, :length)
   end
 end
