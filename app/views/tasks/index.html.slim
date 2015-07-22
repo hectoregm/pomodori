@@ -1,5 +1,8 @@
 h1 Tasks
 
+button type="button" class="btn btn-primary btn-lg new-task"
+  = link_to 'New Task', new_task_path, class: 'btn-link'
+
 .tasks.list-group
   - @tasks.each do |task|
     li.list-group-item
@@ -7,5 +10,4 @@ h1 Tasks
       button type='button' class='btn btn-danger destroy'
         = link_to 'Destroy', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn-link'
 
-button type="button" class="btn btn-primary btn-lg"
-  = link_to 'New Task', new_task_path, class: 'btn-link'
+

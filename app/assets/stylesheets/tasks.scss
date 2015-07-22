@@ -10,6 +10,10 @@
     top: 3px;
   }
 
+  .new-task {
+    margin-bottom: 10px;
+  }
+
   a.btn-link {
     color: #fff;
   }
@@ -20,3 +24,14 @@
   }
 }
 
+@media (min-width: 500px) {
+  .tasks {
+    .new-task {
+      margin-left: 25%;
+    }
+    .list-group {
+      width: 50%;
+      margin: auto;
+    }
+  }  
+}
