@@ -1,23 +1,11 @@
-h1 Listing tasks
+.contaier
+  h1 Tasks
 
-table
-  thead
-    tr
-      th Name
-      th Done
-      th
-      th
-      th
-
-  tbody
+  .tasks.list-group
     - @tasks.each do |task|
-      tr
-        td = task.name
-        td = task.done
-        td = link_to 'Show', task
-        td = link_to 'Edit', edit_task_path(task)
-        td = link_to 'Destroy', task, data: {:confirm => 'Are you sure?'}, :method => :delete
+      li.list-group-item
+        = link_to task.name, task
+        span class='destroy' 
+          = link_to 'Destroy', task, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-br
-
-= link_to 'New Task', new_task_path
+  = link_to 'New Task', new_task_path
