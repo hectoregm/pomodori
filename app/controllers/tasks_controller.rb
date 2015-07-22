@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    query = params[:all] ? {} : { done: false }
+    @tasks = Task.where(query)
   end
 
   def show
@@ -17,28 +18,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    handle_model(@task.save, :created)
   end
 
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    handle_model(@task.update(task_params), :ok)
   end
 
   def destroy
@@ -50,6 +34,19 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def handle_model(success, status)
+    respond_to do |format|
+      if success
+        format.html { redirect_to @task, notice: 'Task was successfully modified.' }
+        format.json { render :show, status: status, location: @task }
+      else
+        action = (status == :created) ? :new : :edit
+        format.html { render action }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def set_task
     @task = Task.find(params[:id])

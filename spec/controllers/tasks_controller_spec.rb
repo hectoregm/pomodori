@@ -1,24 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
-  # This should return the minimal set of attributes required to create a valid
-  # Task. As you add validations to Task, be sure to
-  # adjust the attributes here as well.
+
   let(:valid_attributes) do
-    { name: "Task Foo" }
+    { name: 'Task Foo', done: false }
   end
 
   let(:invalid_attributes) do
     { name: '' }
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # TasksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all tasks as @tasks" do
+  describe 'GET #index' do
+    it 'assigns all tasks as @tasks' do
       task = Task.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:tasks)).to eq([task])
