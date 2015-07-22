@@ -1,3 +1,21 @@
-.list-group-item > .destroy {
-  float: right;
+.tasks {
+
+  .list-group-item {
+    position: relative;
+  }
+
+  .list-group-item > .destroy {
+    position: absolute;
+    right: 5px;
+    top: 3px;
+  }
+
+  a.btn-link {
+    color: #fff;
+  }
+
+  a.btn-link:hover, a.btn-link:focus {
+    color: #fff;
+  }
 }
+

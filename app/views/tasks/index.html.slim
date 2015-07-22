@@ -1,11 +1,11 @@
-.contaier
-  h1 Tasks
+h1 Tasks
 
-  .tasks.list-group
-    - @tasks.each do |task|
-      li.list-group-item
-        = link_to task.name, task
-        span class='destroy' 
-          = link_to 'Destroy', task, data: {:confirm => 'Are you sure?'}, :method => :delete
+.tasks.list-group
+  - @tasks.each do |task|
+    li.list-group-item
+      = link_to task.name, task
+      button type='button' class='btn btn-danger destroy'
+        = link_to 'Destroy', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn-link'
 
-  = link_to 'New Task', new_task_path
+button type="button" class="btn btn-primary btn-lg"
+  = link_to 'New Task', new_task_path, class: 'btn-link'
