@@ -30,6 +30,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'shoulda-matchers', require: false
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 2.0'
   gem 'spring'
