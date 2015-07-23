@@ -1,13 +1,4 @@
 class PomodoriController < ApplicationController
-
-  def index
-    @pomodori = Pomodoro.all
-  end
-
-  def show
-    @pomodoro = Pomodoro.find(params[:id])
-  end
-
   def new
     @task = Task.find(params[:task_id])
     gon.task_id = @task.id
@@ -34,6 +25,9 @@ class PomodoriController < ApplicationController
   private
 
   def pomodoro_params
-    params.require(:pomodoro).permit(:started_at, :task_id, :completed_at, :length)
+    params.require(:pomodoro).permit(:started_at,
+                                     :task_id,
+                                     :completed_at,
+                                     :length)
   end
 end

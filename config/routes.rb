@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :tasks do
-    resources :pomodori, except: [:edit, :update, :destroy]
+    resources :pomodori, only: [:new, :create]
   end
   root 'tasks#index'
 end

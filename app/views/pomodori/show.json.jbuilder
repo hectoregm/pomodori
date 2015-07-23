@@ -1,1 +1,1 @@
-json.extract! @pomodoro, :id, :started_at, :completed_at, :length, :created_at, :updated_at
+json.extract! @pomodoro, :id, :task_id, :length, :started_at, :completed_at, :created_at, :updated_at
