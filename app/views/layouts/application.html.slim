@@ -6,9 +6,10 @@ html
     title Pomodori
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
-  body
+  body class="#{controller_name}"
     .container-fluid
       = yield
 
+    = include_gon namespace: 'pom'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = yield(:javascripts) if content_for?(:javascripts)

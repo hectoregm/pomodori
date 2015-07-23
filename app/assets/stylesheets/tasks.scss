@@ -1,0 +1,34 @@
+.tasks {
+
+  .list-group-item {
+    position: relative;
+  }
+
+  .list-group-item > .destroy {
+    position: absolute;
+    right: 5px;
+    top: 3px;
+  }
+
+  .list-group-item > .start {
+    position: absolute;
+    right: 85px;
+    top: 3px;
+  }
+
+  .new-task {
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 500px) {
+  .tasks {
+    .new-task {
+      margin-left: 25%;
+    }
+    .list-group {
+      width: 50%;
+      margin: auto;
+    }
+  }  
+}

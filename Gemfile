@@ -15,6 +15,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'slim-rails'
 gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.3.5'
+gem 'gon'
 
 gem 'rails_12factor', group: :production
 
@@ -29,10 +30,13 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'shoulda-matchers', require: false
   gem 'spring-commands-rspec'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'method_source'
   gem 'codeclimate-test-reporter', require: nil
 end
