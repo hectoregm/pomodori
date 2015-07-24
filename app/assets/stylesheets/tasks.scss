@@ -1,28 +1,14 @@
 .tasks {
-
   .list-group-item {
-    position: relative;
+    display: flex;
+    align-items: center;
   }
 
-  .list-group-item > .destroy {
-    position: absolute;
-    right: 5px;
-    top: 3px;
-  }
-
-  .list-group-item > .start {
-    position: absolute;
-    right: 85px;
-    top: 3px;
+  .action {
+    text-align: center;
   }
 
   .new-task {
     margin-bottom: 10px;
-  }
-
-  .work-done {
-    position: absolute;
-    right: 190px;
-    top: 10px;
   }
 }

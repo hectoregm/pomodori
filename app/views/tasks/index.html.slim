@@ -8,10 +8,12 @@
   .col-xs-12.col-md-8.col-md-offset-2
     .tasks.list-group
       - @tasks.each do |task|
-        li.list-group-item
-          = link_to task.name, task
-          span.work-done = "#{task.pomodori.count} / #{task.estimate}"
-          = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
-          = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
+        li.list-group-item.row
+          = link_to task.name, task, class: 'col-xs-9 col-md-7'
+          span.work-done.col-xs-3.col-md-1 = "#{task.pomodori.count} / #{task.estimate}"
+          .col-xs-6.col-md-2.action
+            = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
+          .col-xs-6.col-md-2.action
+            = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
 
 
