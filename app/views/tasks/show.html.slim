@@ -6,6 +6,9 @@ p
 p
   strong Done:
   = @task.done
+p
+  strong Estimate:
+  = @task.estimate
 
 = link_to 'Edit', edit_task_path(@task)
 '|
