@@ -1,8 +1,14 @@
 .row
   h1 Tasks
 
-  .col-xs-12.col-md-offset-2
-    = link_to 'New Task', new_task_path, class: 'btn btn-primary btn-lg new-task'
+.row
+  .col-xs-12.col-md-8.col-md-offset-2
+    = simple_form_for @task, html: { class: 'form-inline' } do |f|
+      = f.input :name, label: false, placeholder: 'Enter a new task'
+      = f.input :estimate, label: false, placeholder: '# of Pomodoros'
+      = f.input :done, as: :hidden, input_html: { value: false }
+
+      = f.button :submit
 
 .row
   .col-xs-12.col-md-8.col-md-offset-2

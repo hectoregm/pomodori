@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     query = params[:all] ? {} : { done: false }
+    @task = Task.new
     @tasks = Task.where(query)
   end
 
@@ -53,6 +54,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :done)
+    params.require(:task).permit(:name, :done, :estimate)
   end
 end
