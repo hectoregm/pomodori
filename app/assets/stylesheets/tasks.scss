@@ -4,8 +4,17 @@
     align-items: center;
   }
 
-  .action {
+  .actions {
     text-align: center;
+  }
+
+  .start {
+    margin-right: 5px;
+  }
+
+  .work-done {
+    font-weight: bold;
+    font-size: 16px;
   }
 
   .new-task {
