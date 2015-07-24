@@ -19,16 +19,10 @@
   .new-task {
     margin-bottom: 10px;
   }
-}
 
-@media (min-width: 500px) {
-  .tasks {
-    .new-task {
-      margin-left: 25%;
-    }
-    .list-group {
-      width: 50%;
-      margin: auto;
-    }
-  }  
+  .work-done {
+    position: absolute;
+    right: 190px;
+    top: 10px;
+  }
 }

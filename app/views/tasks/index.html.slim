@@ -1,12 +1,17 @@
-h1 Tasks
+.row
+  h1 Tasks
 
-= link_to 'New Task', new_task_path, class: 'btn btn-primary btn-lg new-task'
+  .col-xs-12.col-md-offset-2
+    = link_to 'New Task', new_task_path, class: 'btn btn-primary btn-lg new-task'
 
-.tasks.list-group
-  - @tasks.each do |task|
-    li.list-group-item
-      = link_to task.name, task
-      = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
-      = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
+.row
+  .col-xs-12.col-md-8.col-md-offset-2
+    .tasks.list-group
+      - @tasks.each do |task|
+        li.list-group-item
+          = link_to task.name, task
+          span.work-done = "#{task.pomodori.count} / #{task.estimate}"
+          = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
+          = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
 
 
