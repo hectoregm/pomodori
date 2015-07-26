@@ -4,23 +4,26 @@
 .row.new-task
   .col-xs-12.col-md-8.col-md-offset-2.clear-padding
     = simple_form_for @task, html: { class: 'form-inline' } do |f|
-      .col-md-7
+      .col-xs-12.col-md-7
         = f.input :name, label: false, placeholder: 'Enter a new task', input_html: { class: 'input-lg' }
-      .col-md-2
+      .col-xs-6.col-md-2
         = f.input :estimate, label: false, placeholder: '# of Pomodoros', input_html: { class: 'input-lg' }
       = f.input :done, as: :hidden, input_html: { value: false }
-      .col-md-3
+      .col-xs-6.col-md-3
         = f.button :submit, class: 'btn-primary btn-lg col'
 
 .row
   .col-xs-12.col-md-8.col-md-offset-2
     .tasks.list-group
       - @tasks.each do |task|
-        li.list-group-item.row
-          = link_to task.name, task, class: 'col-xs-9 col-md-8'
-          span.work-done.col-xs-3.col-md-1 = "#{task.pomodori.count} / #{task.estimate}"
-          .col-xs-6.col-md-3.actions
-            = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
-            = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
+        .row
+          li.list-group-item
+            .col-xs-9.col-md-8
+              = link_to task.name, task
+            .col-xs-4.col-md-1
+              span.work-done = "#{task.pomodori.count} / #{task.estimate}"
+            .col-xs-12.col-md-3.actions
+              = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
+              = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
 
 
