@@ -8,6 +8,7 @@ html
     = csrf_meta_tags
   body class="#{controller_name}"
     .container-fluid
+      = render 'shared/flash'
       = yield
 
     = include_gon namespace: 'pom'

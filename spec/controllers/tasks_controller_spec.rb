@@ -43,35 +43,35 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Task" do
-        expect {
-          post :create, {:task => valid_attributes}, valid_session
-        }.to change(Task, :count).by(1)
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new Task' do
+        expect do
+          post :create, { task: valid_attributes }, valid_session
+        end.to change(Task, :count).by(1)
       end
 
-      it "assigns a newly created task as @task" do
-        post :create, {:task => valid_attributes}, valid_session
+      it 'assigns a newly created task as @task' do
+        post :create, { task: valid_attributes }, valid_session
         expect(assigns(:task)).to be_a(Task)
         expect(assigns(:task)).to be_persisted
       end
 
-      it "redirects to the created task" do
-        post :create, {:task => valid_attributes}, valid_session
-        expect(response).to redirect_to(Task.last)
+      it 'redirects to the task list' do
+        post :create, { task: valid_attributes }, valid_session
+        expect(response).to redirect_to(tasks_path)
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved task as @task" do
-        post :create, {:task => invalid_attributes}, valid_session
+    context 'with invalid params' do
+      it 'assigns a newly created but unsaved task as @task' do
+        post :create, { task: invalid_attributes }, valid_session
         expect(assigns(:task)).to be_a_new(Task)
       end
 
-      it "re-renders the 'new' template" do
-        post :create, {:task => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+      it 're-renders the "index" template' do
+        post :create, {task: invalid_attributes}, valid_session
+        expect(response).to render_template("index")
       end
     end
   end
@@ -94,10 +94,10 @@ RSpec.describe TasksController, type: :controller do
         expect(assigns(:task)).to eq(task)
       end
 
-      it "redirects to the task" do
+      it "redirects to the tasks list" do
         task = Task.create! valid_attributes
         put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
-        expect(response).to redirect_to(task)
+        expect(response).to redirect_to(tasks_path)
       end
     end
 

@@ -4,6 +4,7 @@
 .row.new-task
   .col-xs-12.col-md-8.col-md-offset-2.clear-padding
     = simple_form_for @task, html: { class: 'form-inline' } do |f|
+      = f.error_notification
       .col-xs-12.col-md-7
         = f.input :name, label: false, placeholder: 'Enter a new task', input_html: { class: 'input-lg' }
       .col-xs-6.col-md-2
