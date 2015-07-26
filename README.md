@@ -3,3 +3,25 @@
 # Pomodori
 
 Rails that implements a basic Pomodoro work flow.
+
+## Demo
+
+Demo of app is running at [Pomodori Demo](http://pomodori.hectoregm.com)
+
+## Setup Instructions
+
+Setup:
+
+    bundle install
+    rake db:create
+    rake db:migrate
+    rails s
+
+## Versions
+
+- Ruby 2.2.1
+- Rails 4.2.3
+
+## Server Dependencies
+
+- Postgresql
