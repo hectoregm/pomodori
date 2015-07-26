@@ -1,14 +1,16 @@
 .row
   h1 Tasks
 
-.row
-  .col-xs-12.col-md-8.col-md-offset-2
+.row.new-task
+  .col-xs-12.col-md-8.col-md-offset-2.clear-padding
     = simple_form_for @task, html: { class: 'form-inline' } do |f|
-      = f.input :name, label: false, placeholder: 'Enter a new task'
-      = f.input :estimate, label: false, placeholder: '# of Pomodoros'
+      .col-md-7
+        = f.input :name, label: false, placeholder: 'Enter a new task', input_html: { class: 'input-lg' }
+      .col-md-2
+        = f.input :estimate, label: false, placeholder: '# of Pomodoros', input_html: { class: 'input-lg' }
       = f.input :done, as: :hidden, input_html: { value: false }
-
-      = f.button :submit
+      .col-md-3
+        = f.button :submit, class: 'btn-primary btn-lg col'
 
 .row
   .col-xs-12.col-md-8.col-md-offset-2
