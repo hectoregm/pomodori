@@ -17,14 +17,13 @@
   .col-xs-12.col-md-8.col-md-offset-2
     .tasks.list-group
       - @tasks.each do |task|
-        .row
-          li.list-group-item
-            .col-xs-9.col-md-8
-              = link_to task.name, task
-            .col-xs-4.col-md-1
-              span.work-done = "#{task.pomodori.count} / #{task.estimate}"
-            .col-xs-12.col-md-3.actions
-              = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
-              = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
+        li.list-group-item.row
+          .col-xs-10.col-md-8
+            = link_to task.name, task
+          .col-xs-2.col-md-1
+            span.work-done = "#{task.pomodori.count} / #{task.estimate}"
+          .col-xs-12.col-md-3.actions
+            = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
+            = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
 
 
