@@ -1,5 +1,5 @@
 pomodori.pomodoro = (function () {
-  var start_time, end_time, total, pomodoro_time, break_time;
+  var start_time, end_time, total, pomodoro_time, break_time, notification;
   var state = "initial";
   var timer = document.querySelector('#timer');
   var alarmAudio = document.querySelector('.alarm-audio');
@@ -9,7 +9,7 @@ pomodori.pomodoro = (function () {
   var reset = document.querySelector('.reset');
   var current_pomodoro = 1;
 
-  var init = function (testing, current) {
+  var init = function (testing, notf, current) {
     // Total number of pomodoros completed in this session
     total = 0;
 
@@ -20,6 +20,7 @@ pomodori.pomodoro = (function () {
       break_time = 'in 5 minutes';
     }
     current_pomodoro = current;
+    notification = notf;
 
     // Connect events for start and reset of pomodoro timer.
     $(start).on('click', function () {
@@ -110,6 +111,7 @@ pomodori.pomodoro = (function () {
           total += 1;
           current_pomodoro += 1;
           startBreak();
+          notification.create("Pomodoro Completed");
         },
         error: function(data) {
           console.log("Error in AJAX call.");
@@ -119,6 +121,7 @@ pomodori.pomodoro = (function () {
     } else if (state === "break") {
       $(start).removeClass("hide");
       status.innerHTML = "Continue ?";
+      notification.create("Break Ended");
     }
   };
 
