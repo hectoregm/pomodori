@@ -32,4 +32,13 @@ RSpec.describe Task, type: :model do
       expect(@task).to be_valid
     end
   end
+
+  context 'helper methods' do
+    it 'know the current pomodoro number' do
+      @task = FactoryGirl.create(:task)
+      expect(@task.current_pomodoro_number).to eq(1)
+      FactoryGirl.create(:pomodoro, task: @task)
+      expect(@task.current_pomodoro_number).to eq(2)
+    end
+  end
 end

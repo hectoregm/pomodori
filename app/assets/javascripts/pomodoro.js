@@ -4,11 +4,12 @@ pomodori.pomodoro = (function () {
   var timer = document.querySelector('#timer');
   var alarmAudio = document.querySelector('.alarm-audio');
   var startAudio = document.querySelector('.start-audio');
-  var title = document.querySelector('.title');
+  var status = document.querySelector('.pomodoro-status');
   var start = document.querySelector('.start');
   var reset = document.querySelector('.reset');
+  var current_pomodoro = 1;
 
-  var init = function (testing) {
+  var init = function (testing, current) {
     // Total number of pomodoros completed in this session
     total = 0;
 
@@ -18,6 +19,7 @@ pomodori.pomodoro = (function () {
       pomodoro_time = 'in 25 minutes';
       break_time = 'in 5 minutes';
     }
+    current_pomodoro = current;
 
     // Connect events for start and reset of pomodoro timer.
     $(start).on('click', function () {
@@ -51,7 +53,7 @@ pomodori.pomodoro = (function () {
     }
 
     state = "work";
-    title.innerHTML = "Pomodoro";
+    status.innerHTML = "Pomodoro #" + current_pomodoro;
     startAudio.play();
 
     // Hack to workaround iOS Safari limitation of
@@ -68,15 +70,15 @@ pomodori.pomodoro = (function () {
   var startBreak = function () {
     state = "break";
 
-    title.innerHTML = "Break";
+    status.innerHTML = "Break";
     $(reset).addClass('hide');
 
     if (total === 4) {
       Soon.setOption(timer, 'due', 'in 30 minutes');
-      title.innerHTML = "Long Break";
+      status.innerHTML = "Long Break";
     } else {
       Soon.setOption(timer, 'due', break_time);
-      title.innerHTML = "Break";
+      status.innerHTML = "Break";
     }
   };
 
@@ -84,7 +86,7 @@ pomodori.pomodoro = (function () {
     state = "standby";
     total = 0;
 
-    title.innerHTML = "Pomodoro Reset. Try Again ?";
+    status.innerHTML = "Pomodoro Reset. Try Again ?";
     $(start).removeClass('hide');
     $(reset).addClass('hide');
     Soon.freeze(timer);
@@ -106,6 +108,7 @@ pomodori.pomodoro = (function () {
         success: function (data) {
           console.log(data);
           total += 1;
+          current_pomodoro += 1;
           startBreak();
         },
         error: function(data) {
@@ -115,7 +118,7 @@ pomodori.pomodoro = (function () {
       });
     } else if (state === "break") {
       $(start).removeClass("hide");
-      title.innerHTML = "Continue ?";
+      status.innerHTML = "Continue ?";
     }
   };
 

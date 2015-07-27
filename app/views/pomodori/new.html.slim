@@ -1,13 +1,24 @@
 .row
-  h1.title = @task.name
+  .col-xs-2
+    = link_to '< Tasks List', tasks_path, class: 'h3'
 
-.container
+.row
+  .col-xs-12
+    h1.task-name = @task.name
+
+.row
+  .col-xs-12
+    h1.pomodoro-status = "Pomodoro ##{@task.current_pomodoro_number}"
+
+.timer
   .row
-    #timer
+    .col-xs-8.col-xs-offset-2
+      #timer
 
   .row
-    button.btn.btn-success.btn-lg.start type="button" Start Pomodoro
-    button.btn.btn-danger.btn-lg.reset.hide type="button" Reset Pomodoro
+    .col-xs-12.actions
+      button.btn.btn-success.btn-lg.start type="button" Start Pomodoro
+      button.btn.btn-danger.btn-lg.reset.hide type="button" Reset Pomodoro
 
 
 audio.alarm-audio src=audio_path('alarm.wav')
@@ -18,13 +29,13 @@ audio.start-audio src=audio_path('work_work.mp3')
   p
     Your browser does not support the <code>audio</code> element.
 
-= link_to 'Back', tasks_path
+
 
 = content_for :javascripts do
   javascript:
     var completed = pomodori.pomodoro.completed;
     jQuery(function($) {
-      pomodori.pomodoro.init();
+      pomodori.pomodoro.init(false, #{@task.current_pomodoro_number});
     });
 
 
