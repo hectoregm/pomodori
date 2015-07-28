@@ -4,3 +4,4 @@ languages:
 
 exclude_paths:
 - "spec/*"
+- "app/assets/javascripts/soon.js"
