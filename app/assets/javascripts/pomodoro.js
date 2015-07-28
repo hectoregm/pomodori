@@ -1,5 +1,9 @@
 pomodori.pomodoro = (function () {
-  var start_time, end_time, total, pomodoro_time, break_time, notification;
+  var start_time, end_time, total, notification, timeoutID;
+  var work_time, break_time, long_break_time;
+  var work_minutes = 25;
+  var break_minutes = 5;
+  var long_break_minutes = 30;
   var state = "initial";
   var timer = document.querySelector('#timer');
   var alarmAudio = document.querySelector('.alarm-audio');
@@ -8,19 +12,24 @@ pomodori.pomodoro = (function () {
   var start = document.querySelector('.start');
   var reset = document.querySelector('.reset');
   var current_pomodoro = 1;
+  var self = this;
 
-  var init = function (testing, notf, current) {
+  var init = function (testing, noti, current) {
     // Total number of pomodoros completed in this session
+    // FIXME: Need to use localstorage or from server this value
+    // so a reload does not wipeout our streak.
     total = 0;
 
     if (testing) {
-      break_time = pomodoro_time = 'in 10 seconds';
+      break_time = work_time = long_break_time = 'in 10 seconds';
+      work_minutes = break_minutes = long_break_minutes = 0.1666;
     } else {
-      pomodoro_time = 'in 25 minutes';
-      break_time = 'in 5 minutes';
+      work_time = 'in ' + work_minutes + ' minutes';
+      break_time = 'in ' + break_minutes + ' minutes';
+      long_break_time = 'in ' + long_break_minutes + ' minutes';
     }
-    current_pomodoro = current;
-    notification = notf;
+    current_pomodoro = current; // Current index of pomodori in the task
+    notification = noti;
 
     // Connect events for start and reset of pomodoro timer.
     $(start).on('click', function () {
@@ -34,20 +43,19 @@ pomodori.pomodoro = (function () {
 
   var buildTimer = function () {
     Soon.create(timer, {
-      due: pomodoro_time,
+      due: work_time,
       layout: 'group',
       format: 'm,s',
       face: 'slot roll left fast',
       visual: 'ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom',
-      scaleMax: 'fill',
-      eventComplete: completed
+      scaleMax: 'fill'
     });
   };
 
   var startWork = function () {
     start_time = new Date();
 
-    // If first time need to build timer, need too to be able to play
+    // If first time need to build timer, needed to be able to play
     // sound in iOS
     if (state === 'initial') {
       buildTimer();
@@ -62,7 +70,11 @@ pomodori.pomodoro = (function () {
     alarmAudio.play();
     alarmAudio.pause();
 
-    Soon.setOption(timer, 'due', pomodoro_time);
+    Soon.setOption(timer, 'due', work_time);
+
+    timeoutID = window.setTimeout(function () {
+      self.completed();
+    }, work_minutes * 60 * 1000);
 
     $(start).addClass('hide');
     $(reset).removeClass('hide');
@@ -75,11 +87,20 @@ pomodori.pomodoro = (function () {
     $(reset).addClass('hide');
 
     if (total === 4) {
-      Soon.setOption(timer, 'due', 'in 30 minutes');
+      Soon.setOption(timer, 'due', long_break_time);
       status.innerHTML = "Long Break";
+
+      window.setTimeout(function () {
+        self.completed();
+      }, long_break_minutes * 60 * 1000);
+
     } else {
       Soon.setOption(timer, 'due', break_time);
       status.innerHTML = "Break";
+
+      window.setTimeout(function () {
+        self.completed();
+      }, break_minutes * 60 * 1000);
     }
   };
 
@@ -90,7 +111,8 @@ pomodori.pomodoro = (function () {
     status.innerHTML = "Pomodoro Reset. Try Again ?";
     $(start).removeClass('hide');
     $(reset).addClass('hide');
-    Soon.freeze(timer);
+    Soon.freeze(timer); // Stop timer
+    window.clearTimeout(timeoutID); // Clear timeout
   };
 
   var completed = function () {
