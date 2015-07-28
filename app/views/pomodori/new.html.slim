@@ -37,7 +37,7 @@ audio.start-audio src=audio_path('work_work.mp3')
     jQuery(function($) {
       var notification = pomodori.notification;
       notification.init();
-      pomodori.pomodoro.init(true, notification, #{@task.current_pomodoro_number});
+      pomodori.pomodoro.init(false, notification, #{@task.current_pomodoro_number});
     });
 
 
