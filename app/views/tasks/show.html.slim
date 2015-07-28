@@ -1,15 +1,35 @@
-p#notice = notice
+.row
+  .col-xs-2
+    = link_to '< Tasks List', tasks_path, class: 'h3'
 
-p
-  strong Name:
-  = @task.name
-p
-  strong Done:
-  = @task.done
-p
-  strong Estimate:
-  = @task.estimate
+.row
+  .col-xs-10.col-xs-offset-1
+    h1.task-name = @task.name
+
+.row
+  .col-xs-5.col-xs-offset-1
+    strong Done: 
+    = @task.done
+
+    strong Estimate: 
+    = @task.estimate
+
+.row
+  .col-xs-10.col-xs-offeset-1
+    table.table
+      thead
+        tr
+          th #
+          th Started At
+          th Completed At
+          th Length
+      tbody
+        - @pomodori.each.with_index do |pom, i|
+          tr
+            th = i+1
+            th = pom.started_at
+            th = pom.completed_at
+            th = pom.completed_at - pom.started_at
+
 
 = link_to 'Edit', edit_task_path(@task)
-'|
-= link_to 'Back', tasks_path
