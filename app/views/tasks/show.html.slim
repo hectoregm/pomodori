@@ -23,13 +23,15 @@
           th Started At
           th Completed At
           th Length
+          th
       tbody
         - @pomodori.each.with_index do |pom, i|
           tr
             th = i+1
-            th = pom.started_at
-            th = pom.completed_at
-            th = pom.completed_at - pom.started_at
+            th = l(pom.started_at.in_time_zone("America/Mexico_City"), format: :long)
+            th = l(pom.completed_at.in_time_zone("America/Mexico_City"), format: :long)
+            th = (pom.completed_at - pom.started_at).to_i / 60
+            th = link_to 'Delete', task_pomodoro_path(pom.task, pom), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
 
 
 = link_to 'Edit', edit_task_path(@task)
