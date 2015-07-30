@@ -8,6 +8,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @pomodori = @task.pomodori
   end
 
   def new
