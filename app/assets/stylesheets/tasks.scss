@@ -3,6 +3,20 @@
     display: flex;
     align-items: center;
     font-size: 16px;
+
+    .done {
+      text-decoration: line-through;
+    }
+
+    .form-group {
+      margin: 0;
+      text-align: center;
+
+      .checkbox {
+        display: inline-block;
+        margin: 0;
+      }
+    }
   }
 
   .actions {
