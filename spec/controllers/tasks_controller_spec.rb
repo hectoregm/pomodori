@@ -15,16 +15,24 @@ RSpec.describe TasksController, type: :controller do
   describe 'GET #index' do
     it 'assigns all tasks as @tasks' do
       task = Task.create! valid_attributes
-      get :index, {}, valid_session
+      get :index
       expect(assigns(:tasks)).to eq([task])
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested task as @task" do
+  describe 'GET #show' do
+    it 'assigns the requested task as @task' do
       task = Task.create! valid_attributes
-      get :show, {:id => task.to_param}, valid_session
+      get :show, id: task.to_param
       expect(assigns(:task)).to eq(task)
+    end
+
+    it 'assigns the associated pomodori for the task to @pomodori' do
+      task = Task.create! valid_attributes
+      pomodoro = FactoryGirl.create(:pomodoro, task: task)
+
+      get :show, id: task.to_param
+      expect(assigns(:pomodori)).to eq([pomodoro])
     end
   end
 
