@@ -1,7 +1,15 @@
 .tasks {
+
+  .done-row {
+    width: 3%;
+    padding: 0;
+  }
+
   .list-group-item {
     display: flex;
+    display: -webkit-flex;
     align-items: center;
+    -webkit-align-items: center;
     font-size: 16px;
 
     .done {
@@ -30,6 +38,7 @@
   .work-done {
     font-weight: bold;
     font-size: 16px;
+    text-align: center;
   }
 
   #new_task {
