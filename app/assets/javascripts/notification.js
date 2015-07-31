@@ -7,16 +7,22 @@ pomodori.notification = (function () {
       supported = false;
     }
 
-    // Request permission to the user
-    Notification.requestPermission();
+    if (supported) {
+      Notification.requestPermission();
+    }
   };
 
   var create = function (theBody) {
+    var notification;
     var options = {
       body: theBody,
     };
 
-    return new Notification("Pomodori", options);
+    if (supported) {
+      return new Notification("Pomodori", options);
+    } else {
+      return null;
+    }
   };
 
   return {
