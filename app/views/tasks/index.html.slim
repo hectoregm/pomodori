@@ -19,9 +19,9 @@
       - @tasks.each do |task|
         = simple_form_for task do |f|
           li.list-group-item.row
-            .col-xs-1.col-md-1.done-row
+            .col-xs-1.col-md-1.done-column
               = f.input :done, as: :boolean, label: false, input_html: { class: 'done-input' }
-            .col-xs-9.col-md-7
+            .col-xs-9.col-md-7.name-column
               = link_to task.name, task, class: 'task-name'
             .col-xs-2.col-md-1.work-done
               span = "#{task.pomodori.count} / #{task.estimate}"

@@ -1,8 +1,12 @@
 .tasks {
 
-  .done-row {
+  .done-column {
     width: 3%;
     padding: 0;
+  }
+
+  .name-column {
+    width: 65%;
   }
 
   .list-group-item {
