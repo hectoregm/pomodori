@@ -10,7 +10,40 @@ RSpec.describe PomodoriController, type: :controller do
   end
 
   let(:invalid_attributes) do
-    {}
+    { name: '' }
+  end
+
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new Pomodoro' do
+        expect do
+          post :create, task_id: task.id,  pomodoro: valid_attributes, format: :json
+        end.to change(Pomodoro, :count).by(1)
+      end
+
+      it 'assigns a newly created pomodoro as @pomodoro' do
+        post :create, task_id: task.id, pomodoro: valid_attributes, format: :json
+        expect(assigns(:pomodoro)).to be_a(Pomodoro)
+        expect(assigns(:pomodoro)).to be_persisted
+      end
+
+      it 'renders the newly created pomodoro in json format' do
+        post :create, task_id: task.id, pomodoro: valid_attributes, format: :json
+        expect(response).to render_template('show')
+      end
+    end
+
+    context 'with invalid params' do
+      it 'assigns a newly created but unsaved pomodoro as @pomodoro' do
+        post :create, task_id: task.id, pomodoro: invalid_attributes, format: :json
+        expect(assigns(:pomodoro)).to be_a_new(Pomodoro)
+      end
+
+      it 'render json' do
+        post :create, task_id: task.id, pomodoro: invalid_attributes, format: :json
+        expect(response.content_type).to eq('application/json')
+      end
+    end
   end
 
   describe 'GET #show' do
