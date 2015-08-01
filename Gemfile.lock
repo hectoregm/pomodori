@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/radar/by_star
+  revision: d2d997c98b43999283d6c443351dfae3815c02b4
+  specs:
+    by_star (2.2.1)
+      activesupport
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -285,6 +292,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3.5)
+  by_star!
   capybara
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)

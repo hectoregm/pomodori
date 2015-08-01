@@ -13,6 +13,14 @@ RSpec.describe PomodoriController, type: :controller do
     {}
   end
 
+  describe 'GET #show' do
+    it 'assigns the requested pomodoro as @pomodoro' do
+      pomodoro = Pomodoro.create! valid_attributes
+      get :show, id: pomodoro.to_param, task_id: task.id, format: :json
+      expect(assigns(:pomodoro)).to eq(pomodoro)
+    end
+  end
+
   describe 'DELETE #destroy' do
     it 'destroys the requested pomodoro' do
       pomodoro = Pomodoro.create! valid_attributes

@@ -5,6 +5,10 @@ class PomodoriController < ApplicationController
     @pomodoro = Pomodoro.new
   end
 
+  def show
+    @pomodoro = Pomodoro.find(params[:id])
+  end
+
   def create
     @pomodoro = Pomodoro.new(pomodoro_params)
 

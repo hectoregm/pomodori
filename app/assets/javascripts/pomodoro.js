@@ -1,5 +1,5 @@
 pomodori.pomodoro = (function () {
-  var start_time, end_time, total, notification, timeoutID;
+  var start_time, end_time, notification, timeoutID;
   var work_time, break_time, long_break_time;
   var work_minutes = 25;
   var break_minutes = 5;
@@ -15,11 +15,6 @@ pomodori.pomodoro = (function () {
   var self = this;
 
   var init = function (testing, noti, current) {
-    // Total number of pomodoros completed in this session
-    // FIXME: Need to use localstorage or from server this value
-    // so a reload does not wipeout our streak.
-    total = 0;
-
     if (testing) {
       break_time = work_time = long_break_time = 'in 10 seconds';
       work_minutes = break_minutes = long_break_minutes = 0.1666;
@@ -80,13 +75,13 @@ pomodori.pomodoro = (function () {
     $(reset).removeClass('hide');
   };
 
-  var startBreak = function () {
+  var startBreak = function (longBreak) {
     state = "break";
 
     status.innerHTML = "Break";
     $(reset).addClass('hide');
 
-    if (total === 4) {
+    if (longBreak) {
       Soon.setOption(timer, 'due', long_break_time);
       status.innerHTML = "Long Break";
 
@@ -106,7 +101,6 @@ pomodori.pomodoro = (function () {
 
   var resetPomodoro = function () {
     state = "standby";
-    total = 0;
 
     status.innerHTML = "Pomodoro Reset. Try Again ?";
     $(start).removeClass('hide');
@@ -130,9 +124,8 @@ pomodori.pomodoro = (function () {
                             length: 25 } },
         success: function (data) {
           console.log(data);
-          total += 1;
           current_pomodoro += 1;
-          startBreak();
+          startBreak(data.long_break);
           notification.create("Pomodoro Completed");
         },
         error: function(data) {
