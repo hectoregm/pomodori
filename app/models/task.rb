@@ -6,4 +6,15 @@ class Task < ActiveRecord::Base
   def current_pomodoro_number
     pomodori.count + 1
   end
+
+  def self.worked_today
+    pomodori = Pomodoro.today
+    pomodori.collect do |pom|
+      pom.task
+    end.uniq
+  end
+
+  def pomodori_today
+    pomodori.today
+  end
 end

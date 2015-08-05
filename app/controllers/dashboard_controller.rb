@@ -7,6 +7,9 @@ class DashboardController < ApplicationController
   end
 
   def today
+    Time.use_zone("America/Mexico_City") do
+      @tasks = Task.worked_today
+    end
   end
 
   def week
