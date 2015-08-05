@@ -17,4 +17,11 @@ class Task < ActiveRecord::Base
   def pomodori_today
     pomodori.today
   end
+
+  def self.worked_week
+    pomodori = Pomodoro.by_week
+    pomodori.collect do |pom|
+      pom.task
+    end.uniq
+  end
 end
