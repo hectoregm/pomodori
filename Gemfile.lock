@@ -62,6 +62,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    chronic (0.10.2)
     cliver (0.3.2)
     codeclimate-test-reporter (0.4.7)
       simplecov (>= 0.7.1, < 1.0.0)
@@ -294,6 +295,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.5)
   by_star!
   capybara
+  chronic
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   factory_girl_rails

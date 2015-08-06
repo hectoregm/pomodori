@@ -1,11 +1,15 @@
 .row
-  h1 Week Tasks
+  h1 Week Pomodori
 
-.row
-  .col-xs-12.col-md-8.col-md-offset-2
-    .list-group
-      - @tasks.each do |task|
-        li.list-group-item
-          = link_to task.name, task
-          span.badge
-            = task.pomodori.by_week.count
+- 7.times do |i|
+  .row
+    .col-xs-12.col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-heading
+          = l(@monday + i.day, format: :long)
+        .list-group
+          - Task.worked_at_day(@monday + i.day).each do |task|
+            li.list-group-item
+              = link_to task.name, task
+              span.badge
+                = task.pomodori.by_day(@monday + i.day).count

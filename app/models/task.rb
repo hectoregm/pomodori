@@ -20,8 +20,11 @@ class Task < ActiveRecord::Base
 
   def self.worked_week
     pomodori = Pomodoro.by_week
-    pomodori.collect do |pom|
-      pom.task
-    end.uniq
+    pomodori.collect(&:task).uniq
+  end
+
+  def self.worked_at_day(datetime)
+    pomodori = Pomodoro.between_times(datetime, datetime + 1.day)
+    pomodori.collect(&:task).uniq
   end
 end
