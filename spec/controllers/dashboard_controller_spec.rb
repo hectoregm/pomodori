@@ -16,4 +16,11 @@ RSpec.describe DashboardController, type: :controller do
     end
   end
 
+  describe "GET #week" do
+    it "returns http success" do
+      get :week
+      expect(response).to have_http_status(:success)
+    end
+  end
+
 end
