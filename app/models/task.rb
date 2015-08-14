@@ -9,9 +9,7 @@ class Task < ActiveRecord::Base
 
   def self.worked_today
     pomodori = Pomodoro.today
-    pomodori.collect do |pom|
-      pom.task
-    end.uniq
+    pomodori.collect(&:task).uniq
   end
 
   def pomodori_today

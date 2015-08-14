@@ -9,7 +9,6 @@ class DashboardController < ApplicationController
   end
 
   def week
-    @monday = Chronic.parse("last monday 0:00")
-    @tasks = Task.worked_week
+    @monday = Chronic.parse('last monday 0:00')
   end
 end

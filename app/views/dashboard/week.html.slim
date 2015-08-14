@@ -8,10 +8,11 @@
         .panel-heading
           = l(@monday + i.day, format: :date)
         .list-group
-          - if Task.worked_at_day(@monday + i.day).empty?
+          - tasks = Task.worked_at_day(@monday + i.day)
+          - if tasks.empty?
             li.list-group-item
               | No work done
-          - Task.worked_at_day(@monday + i.day).each do |task|
+          - tasks.each do |task|
             li.list-group-item
               = link_to task.name, task
               span.badge
