@@ -1,0 +1,19 @@
+.row
+  h1 Week Pomodori
+
+- 7.times do |i|
+  .row
+    .col-xs-12.col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-heading
+          = l(@monday + i.day, format: :date)
+        .list-group
+          - tasks = Task.worked_at_day(@monday + i.day)
+          - if tasks.empty?
+            li.list-group-item
+              | No work done
+          - tasks.each do |task|
+            li.list-group-item
+              = link_to task.name, task
+              span.badge
+                = task.pomodori.by_day(@monday + i.day).count

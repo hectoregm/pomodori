@@ -1,0 +1,11 @@
+.row
+  h1 Today Tasks
+
+.row
+  .col-xs-12.col-md-8.col-md-offset-2
+    .list-group
+      - @tasks.each do |task|
+        li.list-group-item
+          = link_to task.name, task
+          span.badge
+            = task.pomodori.today.count

@@ -6,4 +6,23 @@ class Task < ActiveRecord::Base
   def current_pomodoro_number
     pomodori.count + 1
   end
+
+  def self.worked_today
+    pomodori = Pomodoro.today
+    pomodori.collect(&:task).uniq
+  end
+
+  def pomodori_today
+    pomodori.today
+  end
+
+  def self.worked_week
+    pomodori = Pomodoro.by_week
+    pomodori.collect(&:task).uniq
+  end
+
+  def self.worked_at_day(datetime)
+    pomodori = Pomodoro.between_times(datetime, datetime + 1.day)
+    pomodori.collect(&:task).uniq
+  end
 end
