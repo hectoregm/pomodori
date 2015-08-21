@@ -16,11 +16,12 @@ RSpec.describe ListsController, type: :controller do
     end
   end
 
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
+  describe "DELETE #destroy" do
+    it "destroys the requested list" do
+      list = FactoryGirl.create(:list)
+      expect do
+        delete :destroy, id:list.to_param
+      end.to change(List, :count).by(-1)
     end
   end
-
 end

@@ -1,2 +1,11 @@
-h1 Lists#index
-p Find me in app/views/lists/index.html.slim
+.row
+  h1 Lists
+
+.row.new-list
+  .col-xs-12.col-md-8.col-md-offset-2.clear-padding
+    = simple_form_for @list, html: { class: 'form-inline' } do |f|
+      = f.error_notification
+      .col-xs-12.col-md-7
+        = f.input :name, label: false, placeholder: 'Enter list name', input_html: { class: 'input-lg' }
+      .col-xs-6.col-md-3
+        = f.button :submit, class: 'btn btn-primary btn-lg col'
