@@ -11,6 +11,17 @@ html
       = render 'shared/flash'
       = yield
 
+    nav.navbar.navbar-default.navbar-fixed-bottom
+      .container
+        .navbar-header
+          .navbar-brand Pomodori
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              = link_to 'Dashboard', dashboard_index_path
+            li
+              = link_to 'Today', tasks_path
+
     = include_gon namespace: 'pom'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = yield(:javascripts) if content_for?(:javascripts)
