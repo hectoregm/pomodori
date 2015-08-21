@@ -14,8 +14,8 @@ RSpec.describe TasksController, type: :controller do
 
   describe 'GET #index' do
     it 'assigns all tasks as @tasks' do
-      task = Task.create! valid_attributes
-      get :index
+      task = FactoryGirl.create(:task)
+      get :index, list_id: task.list_id
       expect(assigns(:tasks)).to eq([task])
     end
   end

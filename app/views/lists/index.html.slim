@@ -17,4 +17,4 @@
       - @lists.each do |list|
         li.list-group-item.row
           .col-xs-9.col-md-7.name-column
-            = link_to list.name, list
+            = link_to list.name, list_tasks_path(list)

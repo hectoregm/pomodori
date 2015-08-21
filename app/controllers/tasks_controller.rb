@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
+  before_action :set_list, only: [:index]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
     @query = params[:all] ? {} : { done: false }
     @task = Task.new
-    @tasks = Task.where(@query)
+    @tasks = @list.tasks.where(@query)
   end
 
   def show
@@ -54,6 +55,12 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def set_list
+    # FIXME: Add default for Dashboard link
+    id = params[:list_id] || List.last.id
+    @list = List.find(id)
   end
 
   def task_params
