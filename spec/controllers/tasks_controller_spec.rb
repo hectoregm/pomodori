@@ -78,8 +78,8 @@ RSpec.describe TasksController, type: :controller do
       end
 
       it 're-renders the "index" template' do
-        post :create, {task: invalid_attributes}, valid_session
-        expect(response).to render_template("index")
+        post :create, {task: invalid_attributes }, valid_session
+        expect(response).to render_template('index')
       end
     end
   end
