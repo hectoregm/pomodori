@@ -10,6 +10,10 @@ RSpec.describe TasksController, type: :controller do
     { name: '' }
   end
 
+  let(:list) do
+    FactoryGirl.create(:list)
+  end
+
   let(:valid_session) { {} }
 
   describe 'GET #index' do
@@ -55,71 +59,71 @@ RSpec.describe TasksController, type: :controller do
     context 'with valid params' do
       it 'creates a new Task' do
         expect do
-          post :create, { task: valid_attributes }, valid_session
+          post :create, list_id: list.id, task: valid_attributes
         end.to change(Task, :count).by(1)
       end
 
       it 'assigns a newly created task as @task' do
-        post :create, { task: valid_attributes }, valid_session
+        post :create, list_id: list.id, task: valid_attributes
         expect(assigns(:task)).to be_a(Task)
         expect(assigns(:task)).to be_persisted
       end
 
       it 'redirects to the task list' do
-        post :create, { task: valid_attributes }, valid_session
-        expect(response).to redirect_to(tasks_path)
+        post :create, list_id: list.id, task: valid_attributes
+        expect(response).to redirect_to(list_tasks_path(list))
       end
     end
 
     context 'with invalid params' do
       it 'assigns a newly created but unsaved task as @task' do
-        post :create, { task: invalid_attributes }, valid_session
+        post :create, list_id: list.id, task: invalid_attributes
         expect(assigns(:task)).to be_a_new(Task)
       end
 
       it 're-renders the "index" template' do
-        post :create, {task: invalid_attributes }, valid_session
+        post :create, list_id: list.id, task: invalid_attributes
         expect(response).to render_template('index')
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
+  describe 'PUT #update' do
+    let(:task) do
+      FactoryGirl.create(:task)
+    end
+
+    context 'with valid params' do
       let(:new_attributes) do
         { name: 'New task name' }
       end
 
-      it "updates the requested task" do
-        task = Task.create! valid_attributes
-        put :update, {:id => task.to_param, :task => new_attributes}, valid_session
+      it 'updates the requested task' do
+        put :update, list_id: list.id, id: task.to_param, task: new_attributes
         task.reload
       end
 
-      it "assigns the requested task as @task" do
-        task = Task.create! valid_attributes
-        put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
+      it 'assigns the requested task as @task' do
+        put :update, list_id: list.id, id: task.to_param, task: new_attributes
         expect(assigns(:task)).to eq(task)
       end
 
-      it "redirects to the tasks list" do
-        task = Task.create! valid_attributes
-        put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
-        expect(response).to redirect_to(tasks_path)
+      it 'redirects to the tasks list' do
+        put :update, list_id: task.list_id, id: task.to_param, task: new_attributes
+        expect(response).to redirect_to(list_tasks_path(task.list_id))
       end
     end
 
-    context "with invalid params" do
-      it "assigns the task as @task" do
-        task = Task.create! valid_attributes
-        put :update, {:id => task.to_param, :task => invalid_attributes}, valid_session
+    context 'with invalid params' do
+      it 'assigns the task as @task' do
+        put :update, list_id: list.id, id: task.to_param, task: invalid_attributes
         expect(assigns(:task)).to eq(task)
       end
 
       it "re-renders the 'edit' template" do
         task = Task.create! valid_attributes
-        put :update, {:id => task.to_param, :task => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        put :update, list_id: list.id, id: task.to_param, task: invalid_attributes
+        expect(response).to render_template('edit')
       end
     end
   end

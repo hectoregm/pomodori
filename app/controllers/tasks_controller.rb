@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_list, only: [:index]
+  before_action :set_list, only: [:index, :create, :update]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = @list.tasks.build(task_params)
     handle_model(@task.save)
   end
 
@@ -41,7 +41,7 @@ class TasksController < ApplicationController
   def handle_model(success, status = :created)
     respond_to do |format|
       if success
-        format.html { redirect_to tasks_path, notice: "Task was successfully #{status}" }
+        format.html { redirect_to list_tasks_path(@list), notice: "Task was successfully #{status}" }
         format.json { render :show, status: status, location: @task }
       else
         format.html do

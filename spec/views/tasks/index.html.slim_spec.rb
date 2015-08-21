@@ -2,16 +2,21 @@ require 'rails_helper'
 
 RSpec.describe 'tasks/index', type: :view do
   before(:each) do
+    list = List.create(name: 'New List')
+    assign(:list, list)
+
     assign(:task, Task.new)
 
     assign(:tasks, [
       Task.create!(
         name: 'Defend Helm\'s Deep',
-        done: true
+        done: true,
+        list: list
       ),
       Task.create!(
         name: 'Defend Minas Tirith',
-        done: false
+        done: false,
+        list: list
       )
     ])
   end
