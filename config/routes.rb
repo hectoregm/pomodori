@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :today, only: [:show]
+
   get 'dashboard/index'
   get 'dashboard/today'
   get 'dashboard/week'

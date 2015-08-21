@@ -1,0 +1,43 @@
+.row
+  h1 Today Tasks
+
+.row
+  .col-xs-12.col-md-8.col-md-offset-2
+    .tasks.list-group
+      - @tasks.each do |task|
+        = simple_form_for task do |f|
+          li.list-group-item.row
+            .col-xs-1.col-md-1.done-column
+              = f.input :done, as: :boolean, label: false, input_html: { class: 'done-input' }
+            .col-xs-9.col-md-7.name-column
+              = link_to task.name, task, class: 'task-name'
+            .col-xs-2.col-md-1.work-done
+              span = "#{task.pomodori.count} / #{task.estimate}"
+            .col-xs-12.col-md-3.actions
+              = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
+              = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
+
+= content_for :javascripts do
+  javascript:
+    jQuery(function($) {
+      $('.done-input').on('click', function(event) {
+        var done = $(this).is(":checked");
+        var form = $(this).parents('form');
+
+        if (done) {
+          $('.task-name', form).addClass('done');
+        } else {
+          $('.task-name', form).removeClass('done');
+        }
+
+        $.ajax({
+          type: "PATCH",
+          url: form.attr('action'),
+          dataType: "json",
+          data: { task: { done: done} },
+          success: function(data) {
+            console.log(data);
+          }
+        });
+      });
+    });

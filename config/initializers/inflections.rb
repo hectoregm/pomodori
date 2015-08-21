@@ -16,4 +16,5 @@
 # end
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'pomodoro', 'pomodori'
+  inflect.irregular 'today', 'today'
 end
