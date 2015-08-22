@@ -29,11 +29,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    destroy_record(@task)
   end
 
   private
@@ -45,7 +41,8 @@ class TasksController < ApplicationController
         format.json { render :show, status: status, location: @task }
       else
         format.html do
-          @tasks = Task.where(@query)
+          @query = params[:all] ? {} : { done: false }
+          @tasks = @list.tasks.where(@query)
           render(status == :created ? :index : :edit)
         end
         format.json { render json: @task.errors, status: :unprocessable_entity }

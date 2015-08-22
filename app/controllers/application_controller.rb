@@ -7,4 +7,14 @@ class ApplicationController < ActionController::Base
     # instead of this hard coded zone.
     Time.use_zone('America/Mexico_City', &block)
   end
+
+  private
+
+  def destroy_record(record)
+    record.destroy
+    respond_to do |format|
+      format.html { redirect_to url_for(record), notice: "#{record.model_name.name} was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
 end
