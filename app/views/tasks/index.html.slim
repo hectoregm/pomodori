@@ -26,8 +26,9 @@
             .col-xs-2.col-md-1.work-done
               span = "#{task.pomodori.count} / #{task.estimate}"
             .col-xs-12.col-md-3.actions
-              = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
-              = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
+              a.btn.btn-warning.priority = (task.today? ? "Defer" : "Today")
+              = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success'
+
 
 = content_for :javascripts do
   javascript:
@@ -47,6 +48,30 @@
           url: form.attr('action'),
           dataType: "json",
           data: { task: { done: done} },
+          success: function(data) {
+            console.log(data);
+          }
+        });
+      });
+
+      $('.priority').on('click', function(event) {
+        var today = false;
+        var button = $(this);
+        var form = $(this).parents('form');
+
+        if (button.text() === "Defer") {
+          button.text("Today");
+          today = false;
+        } else {
+          button.text("Defer");
+          today = true;
+        }
+
+        $.ajax({
+          type: "PATCH",
+          url: form.attr('action'),
+          dataType: "json",
+          data: { task: { today: today } },
           success: function(data) {
             console.log(data);
           }
