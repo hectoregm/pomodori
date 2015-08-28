@@ -1,11 +1,11 @@
 class TasksController < ApplicationController
-  before_action :set_list, only: [:index, :create, :update]
+  before_action :set_project, only: [:index, :create, :update]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
     @query = params[:all] ? {} : { done: false }
     @task = Task.new
-    @tasks = @list.tasks.where(@query)
+    @tasks = @project.tasks.where(@query)
   end
 
   def show
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @list.tasks.build(task_params)
+    @task = @project.tasks.build(task_params)
     handle_model(@task.save)
   end
 
@@ -37,12 +37,12 @@ class TasksController < ApplicationController
   def handle_model(success, status = :created)
     respond_to do |format|
       if success
-        format.html { redirect_to list_tasks_path(@list), notice: "Task was successfully #{status}" }
+        format.html { redirect_to project_tasks_path(@project), notice: "Task was successfully #{status}" }
         format.json { render :show, status: status, location: @task }
       else
         format.html do
           @query = params[:all] ? {} : { done: false }
-          @tasks = @list.tasks.where(@query)
+          @tasks = @project.tasks.where(@query)
           render(status == :created ? :index : :edit)
         end
         format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -54,10 +54,10 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  def set_list
+  def set_project
     # FIXME: Add default for Dashboard link
-    id = params[:list_id] || List.last.id
-    @list = List.find(id)
+    id = params[:project_id] || Project.last.id
+    @project = Project.find(id)
   end
 
   def task_params

@@ -11,16 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821170756) do
+ActiveRecord::Schema.define(version: 20150828230531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "lists", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "pomodori", force: :cascade do |t|
     t.datetime "started_at"
@@ -31,13 +25,19 @@ ActiveRecord::Schema.define(version: 20150821170756) do
     t.integer  "task_id",      null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
     t.boolean  "done"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "estimate",   default: 2,     null: false
-    t.integer  "list_id"
+    t.integer  "project_id"
     t.boolean  "today",      default: false
   end
 

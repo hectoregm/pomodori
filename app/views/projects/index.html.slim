@@ -1,20 +1,20 @@
 .row
-  h1 Lists
+  h1 Projects
 
-.row.new-list
+.row.new-project
   .col-xs-12.col-md-8.col-md-offset-2.clear-padding
-    = simple_form_for @list, html: { class: 'form-inline' } do |f|
+    = simple_form_for @project, html: { class: 'form-inline' } do |f|
       = f.error_notification
       .row
         .col-xs-12.col-md-9
-          = f.input :name, label: false, placeholder: 'Enter list name', input_html: { class: 'input-lg' }
+          = f.input :name, label: false, placeholder: 'Enter project name', input_html: { class: 'input-lg' }
         .col-xs-6.col-md-3
           = f.button :submit, class: 'btn btn-primary btn-lg col'
 
 .row
   .col-xs-12.col-md-8.col-md-offset-2
     .tasks.list-group
-      - @lists.each do |list|
+      - @projects.each do |project|
         li.list-group-item.row
           .col-xs-9.col-md-7.name-column
-            = link_to list.name, list_tasks_path(list)
+            = link_to project.name, project_tasks_path(project)

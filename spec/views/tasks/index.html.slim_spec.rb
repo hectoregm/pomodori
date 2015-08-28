@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'tasks/index', type: :view do
   before(:each) do
-    list = List.create(name: 'New List')
-    assign(:list, list)
+    project = Project.create(name: 'New Project')
+    assign(:project, project)
 
     assign(:task, Task.new)
 
@@ -11,12 +11,12 @@ RSpec.describe 'tasks/index', type: :view do
       Task.create!(
         name: 'Defend Helm\'s Deep',
         done: true,
-        list: list
+        project: project
       ),
       Task.create!(
         name: 'Defend Minas Tirith',
         done: false,
-        list: list
+        project: project
       )
     ])
   end

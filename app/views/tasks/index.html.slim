@@ -1,9 +1,9 @@
 .row
-  h1 = @list.name
+  h1 = @project.name
 
 .row.new-task
   .col-xs-12.col-md-8.col-md-offset-2.clear-padding
-    = simple_form_for [@list, @task], html: { class: 'form-inline' } do |f|
+    = simple_form_for [@project, @task], html: { class: 'form-inline' } do |f|
       = f.error_notification
       .col-xs-12.col-md-7
         = f.input :name, label: false, placeholder: 'Enter a new task', input_html: { class: 'input-lg' }

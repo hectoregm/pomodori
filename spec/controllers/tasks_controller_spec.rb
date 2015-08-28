@@ -10,8 +10,8 @@ RSpec.describe TasksController, type: :controller do
     { name: '' }
   end
 
-  let(:list) do
-    FactoryGirl.create(:list)
+  let(:project) do
+    FactoryGirl.create(:project)
   end
 
   let(:valid_session) { {} }
@@ -19,7 +19,7 @@ RSpec.describe TasksController, type: :controller do
   describe 'GET #index' do
     it 'assigns all tasks as @tasks' do
       task = FactoryGirl.create(:task)
-      get :index, list_id: task.list_id
+      get :index, project_id: task.project_id
       expect(assigns(:tasks)).to eq([task])
     end
   end
@@ -59,30 +59,30 @@ RSpec.describe TasksController, type: :controller do
     context 'with valid params' do
       it 'creates a new Task' do
         expect do
-          post :create, list_id: list.id, task: valid_attributes
+          post :create, project_id: project.id, task: valid_attributes
         end.to change(Task, :count).by(1)
       end
 
       it 'assigns a newly created task as @task' do
-        post :create, list_id: list.id, task: valid_attributes
+        post :create, project_id: project.id, task: valid_attributes
         expect(assigns(:task)).to be_a(Task)
         expect(assigns(:task)).to be_persisted
       end
 
-      it 'redirects to the task list' do
-        post :create, list_id: list.id, task: valid_attributes
-        expect(response).to redirect_to(list_tasks_path(list))
+      it 'redirects to the task project' do
+        post :create, project_id: project.id, task: valid_attributes
+        expect(response).to redirect_to(project_tasks_path(project))
       end
     end
 
     context 'with invalid params' do
       it 'assigns a newly created but unsaved task as @task' do
-        post :create, list_id: list.id, task: invalid_attributes
+        post :create, project_id: project.id, task: invalid_attributes
         expect(assigns(:task)).to be_a_new(Task)
       end
 
       it 're-renders the "index" template' do
-        post :create, list_id: list.id, task: invalid_attributes
+        post :create, project_id: project.id, task: invalid_attributes
         expect(response).to render_template('index')
       end
     end
@@ -99,30 +99,30 @@ RSpec.describe TasksController, type: :controller do
       end
 
       it 'updates the requested task' do
-        put :update, list_id: list.id, id: task.to_param, task: new_attributes
+        put :update, project_id: project.id, id: task.to_param, task: new_attributes
         task.reload
       end
 
       it 'assigns the requested task as @task' do
-        put :update, list_id: list.id, id: task.to_param, task: new_attributes
+        put :update, project_id: project.id, id: task.to_param, task: new_attributes
         expect(assigns(:task)).to eq(task)
       end
 
-      it 'redirects to the tasks list' do
-        put :update, list_id: task.list_id, id: task.to_param, task: new_attributes
-        expect(response).to redirect_to(list_tasks_path(task.list_id))
+      it 'redirects to the tasks project' do
+        put :update, project_id: task.project_id, id: task.to_param, task: new_attributes
+        expect(response).to redirect_to(project_tasks_path(task.project_id))
       end
     end
 
     context 'with invalid params' do
       it 'assigns the task as @task' do
-        put :update, list_id: list.id, id: task.to_param, task: invalid_attributes
+        put :update, project_id: project.id, id: task.to_param, task: invalid_attributes
         expect(assigns(:task)).to eq(task)
       end
 
       it "re-renders the 'edit' template" do
         task = Task.create! valid_attributes
-        put :update, list_id: list.id, id: task.to_param, task: invalid_attributes
+        put :update, project_id: project.id, id: task.to_param, task: invalid_attributes
         expect(response).to render_template('edit')
       end
     end
@@ -136,7 +136,7 @@ RSpec.describe TasksController, type: :controller do
       }.to change(Task, :count).by(-1)
     end
 
-    it "redirects to the tasks list" do
+    it "redirects to the tasks project" do
       task = Task.create! valid_attributes
       delete :destroy, {:id => task.to_param}, valid_session
       expect(response).to redirect_to(tasks_url)

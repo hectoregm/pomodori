@@ -2,6 +2,6 @@ FactoryGirl.define do
   factory :task do
     name 'Task'
     done false
-    list
+    project
   end
 end

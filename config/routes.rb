@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'dashboard/today'
   get 'dashboard/week'
 
-  resources :lists, only: [:index, :create, :destroy] do
+  resources :projects, only: [:index, :create, :destroy] do
     resources :tasks
   end
 
