@@ -26,7 +26,8 @@
             .col-xs-2.col-md-1.work-done
               span = "#{task.pomodori.count} / #{task.estimate}"
             .col-xs-12.col-md-3.actions
-              a.btn.btn-warning.priority = (task.today? ? "Defer" : "Today")
+              a.btn.priority class="btn-#{task.today ? 'danger' : 'warning'}"
+                = (task.today? ? "Defer" : "Today")
               = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success'
 
 
@@ -61,9 +62,13 @@
 
         if (button.text() === "Defer") {
           button.text("Today");
+          button.removeClass('btn-danger');
+          button.addClass('btn-warning');
           today = false;
         } else {
           button.text("Defer");
+          button.removeClass('btn-warning');
+          button.addClass('btn-danger');
           today = true;
         }
 
