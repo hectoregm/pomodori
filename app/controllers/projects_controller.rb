@@ -6,11 +6,21 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    @project.save
 
     respond_to do |format|
-      format.html { redirect_to projects_path, notice: "Project was successfully #{status}" }
-      format.json { render :show, status: status }
+      if @project.save
+        format.html do
+          redirect_to projects_path,
+                      notice: 'Project was successfully created'
+        end
+        format.json { render :show, status: status }
+      else
+        format.html do
+          @projects = Project.all
+          render :index
+        end
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
 
