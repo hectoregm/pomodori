@@ -11,10 +11,10 @@
               = f.input :done, as: :boolean, label: false, input_html: { class: 'done-input' }
             .col-xs-9.col-md-7.name-column
               = link_to task.name, task, class: 'task-name'
-            .col-xs-2.col-md-1.work-done
+            .col-xs-2.col-md-1.work-done-column
               span = "#{task.pomodori.count} / #{task.estimate}"
-            .col-xs-12.col-md-3.actions
-              = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start'
+            .col-xs-12.col-md-3.actions-column
+              = link_to 'Start Work', new_task_pomodoro_path(task), class: 'btn btn-success start-work'
               = link_to 'Delete', task, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
 
 = content_for :javascripts do

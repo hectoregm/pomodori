@@ -9,6 +9,16 @@
     width: 65%;
   }
 
+  .work-done-column {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .actions-column {
+    text-align: center;
+  }
+
   .list-group-item {
     display: flex;
     display: -webkit-flex;
@@ -31,18 +41,12 @@
     }
   }
 
-  .actions {
-    text-align: center;
-  }
-
   .priority {
     margin-right: 5px;
   }
 
-  .work-done {
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
+  .start-work {
+    margin-right: 5px;
   }
 
   #new_task {
