@@ -16,7 +16,11 @@
     .projects.list-group
       - @projects.each do |project|
         li.list-group-item.row
-          .col-xs-9.col-md-9.name-column
+          .col-xs-9.col-md-6.name-column
             = link_to project.name, project_tasks_path(project)
+          .col-xs-9.col-md-3.name-column
+            .progress
+              .progress-bar style="width: #{project.progress}%; min-width: 2em;"
+                | #{(project.progress.to_i)}%
           .col-xs-12.col-md-3.actions-column
             = link_to 'Delete', project, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
