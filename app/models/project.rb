@@ -3,22 +3,28 @@ class Project < ActiveRecord::Base
 
   has_many :tasks
 
+  def tasks_done
+    tasks.where(done: true)
+  end
+
   def tasks_not_done
     tasks.where(done: false)
   end
 
   def progress
-    total_estimate = 0
+    total = 0
     total_done = 0
-    tasks_not_done.each do |task|
-      total_estimate += task.estimate
-      total_done += task.pomodori.count
+
+    tasks_done.each do |task|
+      total += task.estimate
+      total_done += task.estimate
     end
 
-    if total_estimate.zero?
-      100
-    else
-      (total_done / total_estimate.to_f) * 100
+    tasks_not_done.each do |task|
+      total += task.estimate
+      total_done += (task.pomodori.count < task.estimate) ? task.pomodori.count : task.estimate
     end
+
+    (total_done / total.to_f) * 100
   end
 end
