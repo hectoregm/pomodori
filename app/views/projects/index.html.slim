@@ -20,7 +20,9 @@
             = link_to project.name, project_tasks_path(project)
           .col-xs-9.col-md-3.name-column
             .progress
-              .progress-bar style="width: #{project.progress}%; min-width: 2em;"
-                | #{(project.progress.to_i)}%
+              - progress = project.progress
+              .progress-bar.progress-bar-success style="width: #{progress[:done]}%; min-width: 2em;"
+                | #{progress[:done].to_i}%
+              .progress-bar.progress-bar-warning style="width: #{progress[:in_progress]}%;"
           .col-xs-12.col-md-3.actions-column
             = link_to 'Delete', project, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'

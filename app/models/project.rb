@@ -14,6 +14,7 @@ class Project < ActiveRecord::Base
   def progress
     total = 0
     total_done = 0
+    total_partial = 0
 
     tasks_done.each do |task|
       total += task.estimate
@@ -22,9 +23,12 @@ class Project < ActiveRecord::Base
 
     tasks_not_done.each do |task|
       total += task.estimate
-      total_done += (task.pomodori.count < task.estimate) ? task.pomodori.count : task.estimate
+      total_partial += (task.pomodori.count < task.estimate) ? task.pomodori.count : task.estimate
     end
 
-    (total_done / total.to_f) * 100
+    {
+      done: (total_done / total.to_f) * 100,
+      in_progress: (total_partial / total.to_f) * 100,
+    }
   end
 end
