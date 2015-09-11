@@ -49,6 +49,10 @@
     margin-right: 5px;
   }
 
+  .margin-right {
+    margin-right: 10px;
+  }
+
   #new_task {
     .form-group {
       width: 100%;
@@ -70,5 +74,14 @@
 
   .pomodori {
     margin-top: 1em;
+  }
+
+  .show-actions {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  .nav-link {
+    font-size: 18px;
   }
 }
