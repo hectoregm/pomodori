@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_project, only: [:index, :create, :update]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:index, :create, :update]
 
   def index
     @query = params[:all] ? {} : { done: false }
@@ -55,8 +55,8 @@ class TasksController < ApplicationController
   end
 
   def set_project
-    # FIXME: Add default for Dashboard link
-    id = params[:project_id] || Project.last.id
+    # FIXME: Need to remove this
+    id = params[:project_id] || @task.project.id
     @project = Project.find(id)
   end
 
