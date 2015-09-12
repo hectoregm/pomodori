@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
 
+  let(:project) do
+    FactoryGirl.create(:project)
+  end
+
   let(:valid_attributes) do
-    { name: 'Task Foo', done: false }
+    { name: 'Task Foo', done: false, project_id: project.id }
   end
 
   let(:invalid_attributes) do
     { name: '' }
-  end
-
-  let(:project) do
-    FactoryGirl.create(:project)
   end
 
   let(:valid_session) { {} }
@@ -128,18 +128,18 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested task" do
+  describe 'DELETE #destroy' do
+    it 'destroys the requested task' do
       task = Task.create! valid_attributes
       expect {
         delete :destroy, {:id => task.to_param}, valid_session
       }.to change(Task, :count).by(-1)
     end
 
-    it "redirects to the tasks project" do
+    it 'redirects to the tasks project' do
       task = Task.create! valid_attributes
       delete :destroy, {:id => task.to_param}, valid_session
-      expect(response).to redirect_to(tasks_url)
+      expect(response).to redirect_to(project_tasks_path(task.project))
     end
   end
 

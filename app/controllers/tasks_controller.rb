@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :set_project, only: [:index, :create, :update]
+  before_action :set_project, only: [:index, :create, :update, :destroy]
 
   def index
     @query = params[:all] ? {} : { done: false }
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    destroy_record(@task)
+    destroy_record(@task, project_tasks_path(@project))
   end
 
   private
