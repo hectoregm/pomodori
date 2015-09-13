@@ -26,9 +26,16 @@ class Project < ActiveRecord::Base
       total_partial += (task.pomodori.count < task.estimate) ? task.pomodori.count : task.estimate
     end
 
-    {
-      done: (total_done / total.to_f) * 100,
-      in_progress: (total_partial / total.to_f) * 100,
-    }
+    if total.zero?
+      {
+        done: 0,
+        in_progress: 0,
+      }
+    else
+      {
+        done: (total_done / total.to_f) * 100,
+        in_progress: (total_partial / total.to_f) * 100,
+      }
+    end
   end
 end
