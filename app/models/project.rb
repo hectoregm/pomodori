@@ -29,12 +29,12 @@ class Project < ActiveRecord::Base
     if total.zero?
       {
         done: 0,
-        in_progress: 0,
+        in_progress: 0
       }
     else
       {
         done: (total_done / total.to_f) * 100,
-        in_progress: (total_partial / total.to_f) * 100,
+        in_progress: (total_partial / total.to_f) * 100
       }
     end
   end
