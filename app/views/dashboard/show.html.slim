@@ -1,0 +1,11 @@
+.row
+  h1 Dashboard
+
+.row
+  .col-xs-12.col-md-6.stats
+    h2 Pomodori Today
+    = link_to @total_today, today_dashboard_path, class: 'btn btn-primary'
+      
+  .col-xs12.col-md-6.stats
+    h2 Pomodori Week
+    = link_to @total_week, week_dashboard_path, class: 'btn btn-primary'

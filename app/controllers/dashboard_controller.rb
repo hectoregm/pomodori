@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  def index
+  def show
     @total_today = Pomodoro.today.count
     @total_week = Pomodoro.by_week.count
   end
