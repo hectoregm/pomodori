@@ -56,8 +56,7 @@ class TasksController < ApplicationController
 
   def set_project
     # FIXME: Need to remove this
-    id = params[:project_id] || @task.project.id
-    @project = Project.find(id)
+    @project = Project.find_by(id: params[:project_id]) || @task.project
   end
 
   def task_params
