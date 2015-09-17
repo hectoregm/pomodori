@@ -89,3 +89,10 @@ guard :rspec, cmd: 'bin/rspec', all_on_start: true do
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 end
+
+guard :jasmine do
+  watch(%r{^spec/javascripts/.*(?:_s|S)pec\.(coffee|js)$})
+  watch(%r{app/assets/javascripts/(.+?)\.(js\.coffee|js|coffee)(?:\.\w+)*$}) do |m|
+    "spec/javascripts/jasmine/#{ m[1] }_spec.#{ m[2] }"
+  end
+end

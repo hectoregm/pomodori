@@ -16,7 +16,7 @@ gem 'slim-rails'
 gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'gon'
-gem 'by_star', :git => "git://github.com/radar/by_star"
+gem 'by_star', git: 'git://github.com/radar/by_star'
 gem 'chronic'
 
 gem 'rails_12factor', group: :production
@@ -28,6 +28,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'guard-jasmine'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
