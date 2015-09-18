@@ -34,6 +34,8 @@ pomodori.pomodoro = (function () {
     $(reset).on('click', function () {
       resetPomodoro();
     });
+
+    return true;
   };
 
   var buildTimer = function () {
