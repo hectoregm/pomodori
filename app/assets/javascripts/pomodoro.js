@@ -43,7 +43,7 @@ pomodori.pomodoro = (function () {
       due: work_time,
       layout: 'group',
       format: 'm,s',
-      face: 'slot roll left fast',
+      face: 'slot',
       visual: 'ring cap-round invert progressgradient-fb801b_f1d935 ring-width-custom',
       scaleMax: 'fill'
     });
