@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   resources :tasks do
     resources :pomodori, only: [:new, :show, :create, :destroy]
   end
-  root 'today#show'
+  root 'home#index'
 end
