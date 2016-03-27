@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PomodoriController, type: :controller do
+  let(:user) { FactoryGirl.create(:user) }
   let(:task) do
     FactoryGirl.create(:task)
   end
@@ -11,6 +12,11 @@ RSpec.describe PomodoriController, type: :controller do
 
   let(:invalid_attributes) do
     { name: '' }
+  end
+
+  before do
+    allow(controller).to receive(:authenticate_user!)
+    allow(controller).to receive(:current_user).and_return(user)
   end
 
   describe 'POST #create' do

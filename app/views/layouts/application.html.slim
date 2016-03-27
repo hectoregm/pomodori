@@ -22,9 +22,9 @@ html
             span.icon-bar
         #collapse.navbar-collapse.collapse
           ul.nav.navbar-nav
-            li
-              = link_to 'Home', root_path
             - unless user_signed_in?
+              li
+                = link_to 'Home', root_path
               li
                 = link_to 'Sign up', new_user_registration_path
               li
