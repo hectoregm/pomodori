@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
-
-  let(:project) do
-    FactoryGirl.create(:project)
-  end
-
+  let(:user) { FactoryGirl.create(:user) }
+  let(:project) { FactoryGirl.create(:project) }
+    
   let(:valid_attributes) do
     { name: 'Task Foo', done: false, project_id: project.id }
   end
@@ -15,6 +13,11 @@ RSpec.describe TasksController, type: :controller do
   end
 
   let(:valid_session) { {} }
+
+  before do
+    allow(controller).to receive(:authenticate_user!)
+    allow(controller).to receive(:current_user).and_return(user)
+  end
 
   describe 'GET #index' do
     it 'assigns all tasks as @tasks' do

@@ -21,6 +21,7 @@ class TasksController < ApplicationController
 
   def create
     @task = @project.tasks.build(task_params)
+    @task.author = current_user
     handle_model(@task.save)
   end
 
