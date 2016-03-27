@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resource :today, only: [:show]
 
   resource :dashboard, only: [:show] do

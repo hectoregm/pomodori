@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  around_filter :time_zone
+  #around_filter :time_zone
   protect_from_forgery with: :exception
 
   def time_zone(&block)
