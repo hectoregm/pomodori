@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327060940) do
+ActiveRecord::Schema.define(version: 20160327170246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,10 @@ ActiveRecord::Schema.define(version: 20160327060940) do
     t.integer  "estimate",   default: 2,     null: false
     t.integer  "project_id"
     t.boolean  "today",      default: false
+    t.integer  "author_id"
   end
+
+  add_index "tasks", ["author_id"], name: "index_tasks_on_author_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -81,4 +84,5 @@ ActiveRecord::Schema.define(version: 20160327060940) do
 
   add_foreign_key "identities", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "tasks", "users", column: "author_id"
 end
