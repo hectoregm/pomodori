@@ -1,7 +1,10 @@
 class Project < ActiveRecord::Base
   validates_presence_of :name
 
+  belongs_to :user
   has_many :tasks
+
+  scope :persisted, -> { where.not(id: nil) }
 
   def tasks_done
     tasks.where(done: true)

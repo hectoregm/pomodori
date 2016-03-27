@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
   def index
-    @project = Project.new
-    @projects = Project.all
+    @project = current_user.projects.build
+    @projects = current_user.projects.persisted
   end
 
   def create
     @project = Project.new(project_params)
+    @project.user = current_user
 
     respond_to do |format|
       if @project.save
