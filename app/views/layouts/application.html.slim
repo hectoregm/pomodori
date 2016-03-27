@@ -7,7 +7,7 @@ html
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
   body class="#{controller_name}"
-    .container-fluid
+    .container
       = render 'shared/flash'
       = yield
 
@@ -15,7 +15,12 @@ html
       .container
         .navbar-header
           .navbar-brand Pomodori
-        .navbar-collapse.collapse
+          button.navbar-toggle.collapsed type="button" data-toggle="collapse" data-target="#collapse"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        #collapse.navbar-collapse.collapse
           ul.nav.navbar-nav
             li
               = link_to 'Home', root_path
@@ -39,5 +44,5 @@ html
                   = link_to 'Sign out', destroy_user_session_path, method: :delete
 
     = include_gon namespace: 'pom'
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application'
     = yield(:javascripts) if content_for?(:javascripts)

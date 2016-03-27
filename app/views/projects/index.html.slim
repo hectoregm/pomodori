@@ -2,27 +2,25 @@
   h1 Projects
 
 .row.new-project
-  .col-xs-12.col-md-8.col-md-offset-2.clear-padding
+  .col-xs-12.col-md-12.clear-padding
     = simple_form_for @project, html: { class: 'form-inline' } do |f|
       = f.error_notification
       .row
         .col-xs-12.col-md-9
           = f.input :name, label: false, placeholder: 'Enter project name', input_html: { class: 'input-lg' }
-        .col-xs-6.col-md-3
+        .col-xs-12.col-md-3
           = f.button :submit, class: 'btn btn-primary btn-lg col'
 
-.row
-  .col-xs-12.col-md-8.col-md-offset-2
-    .projects.list-group
-      - @projects.each do |project|
-        li.list-group-item.row
-          .col-xs-9.col-md-6.name-column
-            = link_to project.name, project_tasks_path(project)
-          .col-xs-9.col-md-3.name-column
-            .progress
-              - progress = project.progress
-              .progress-bar.progress-bar-success style="width: #{progress[:done]}%; min-width: 2em;"
-                | #{progress[:done].to_i}%
-              .progress-bar.progress-bar-warning style="width: #{progress[:in_progress]}%;"
-          .col-xs-12.col-md-3.actions-column
-            = link_to 'Delete', project, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
+.projects.list-group
+  - @projects.each do |project|
+    li.list-group-item.row
+      .col-xs-9.col-md-7.name-column
+        = link_to project.name, project_tasks_path(project)
+      .col-xs-9.col-md-3.name-column
+        .progress
+          - progress = project.progress
+          .progress-bar.progress-bar-success style="width: #{progress[:done]}%; min-width: 2em;"
+            | #{progress[:done].to_i}%
+          .progress-bar.progress-bar-warning style="width: #{progress[:in_progress]}%;"
+      .col-xs-12.col-md-2.actions-column
+        = link_to 'Delete', project, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger destroy'
