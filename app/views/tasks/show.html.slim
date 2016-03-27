@@ -16,6 +16,11 @@
     strong Initial Estimate: 
     = "#{@task.estimate} Pomodori"
 
+.row
+  .col-xs-5.col-xs-offset-1
+    strong Author:
+    = "#{@task.author.email}"
+
 .row.show-actions
   .col-xs-2.col-xs-offset-1
     = link_to 'Start Work', new_task_pomodoro_path(@task), class: 'btn btn-success btn-lg'

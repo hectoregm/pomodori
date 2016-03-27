@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
   validates_numericality_of :estimate, greater_than_or_equal_to: 1
   has_many :pomodori, dependent: :destroy
   belongs_to :project
+  belongs_to :author, class_name: 'User'
 
   def current_pomodoro_number
     pomodori.count + 1
