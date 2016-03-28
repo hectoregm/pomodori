@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
   end
 
   def week
+    Chronic.time_class = Time.zone
     @monday = Chronic.parse('this week monday 0:00')
   end
 end
